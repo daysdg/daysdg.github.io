@@ -7,5 +7,83 @@
       
       <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
       
+      <script type="text/javascript">
+
+      var ctx = document.getElementById('canvas');
+      
+      var data =  {
+        labels: ['29/04/2020', '06/05/2020', '13/05/2020'],
+        datasets: [
+          {
+            label: 'Dishwasher',
+            fill: false,
+            borderColor: 'rgb(66, 133, 244)',
+            data: [45, 64]
+          },
+          {
+            label: 'Tumble Dryer',
+            fill: false,
+            borderColor: 'rgb(244, 180, 0)',
+            data: [49, 44]
+          },
+          {
+            label: 'Washing Machine',
+            fill: false,
+            borderColor: 'rgb(15, 157, 88)',
+            data: [80, 78]
+          },
+          {
+            label: 'Washer Dryer',
+            fill: false,
+            borderColor: 'rgb(171, 71, 188)',
+            data: [, 71]
+          },
+          {
+            label: 'Fridge',
+            fill: false,
+            borderColor: 'rgb(0, 172, 193)',
+            data: [45, 60]
+          },
+          {
+            label: 'Objetive',
+            borderColor: 'rgb(219, 68, 55)',
+            backgroundColor: 'rgba(219, 68, 55, 0.2)',
+            data: [80, 80, 80]
+          }
+        ]
+      }
+
+      var options = {
+        title: {
+            display: true,
+            text: 'Detected',
+            fontSize: 30,
+            fontStyle: 'bold',
+            fontColor: '#000',
+            lineHeight: 3
+        },
+        legend: {
+          position: 'right',
+          align: 'start'
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }]
+        }
+      };
+      
+      var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: data,
+        options: options
+      });
+
+
+    </script>
+      
     </body>
 </html>
