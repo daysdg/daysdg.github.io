@@ -1,89 +1,238 @@
 <!DOCTYPE html>
-  <html>
-    <body>
-      <div style="display: block; width: 1000px;">
-        <canvas id="canvas"></canvas>
-      </div>
-      
-      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-      
-      <script type="text/javascript">
+<html>
 
-      var ctx = document.getElementById('canvas');
-      
-      var data =  {
-        labels: ['29/04/2020', '06/05/2020', '13/05/2020'],
-        datasets: [
-          {
-            label: 'Dishwasher',
-            fill: false,
-            borderColor: 'rgb(66, 133, 244)',
-            data: [45, 64]
-          },
-          {
-            label: 'Tumble Dryer',
-            fill: false,
-            borderColor: 'rgb(244, 180, 0)',
-            data: [49, 44]
-          },
-          {
-            label: 'Washing Machine',
-            fill: false,
-            borderColor: 'rgb(15, 157, 88)',
-            data: [80, 78]
-          },
-          {
-            label: 'Washer Dryer',
-            fill: false,
-            borderColor: 'rgb(171, 71, 188)',
-            data: [, 71]
-          },
-          {
-            label: 'Fridge',
-            fill: false,
-            borderColor: 'rgb(0, 172, 193)',
-            data: [45, 60]
-          },
-          {
-            label: 'Objetive',
-            borderColor: 'rgb(219, 68, 55)',
-            backgroundColor: 'rgba(219, 68, 55, 0.2)',
-            data: [80, 80, 80]
-          }
-        ]
-      }
+  <body>
+    <div style="display: block; width: 1000px; margin-left: auto; margin-right: auto;">
+      <canvas id="canvas_detected"></canvas>
+      <canvas id="canvas_falsepositive"></canvas>
+      <canvas id="canvas_correct"></canvas>
+    </div>
 
-      var options = {
-        title: {
-            display: true,
-            text: 'Detected',
-            fontSize: 30,
-            fontStyle: 'bold',
-            fontColor: '#000',
-            lineHeight: 3
-        },
-        legend: {
-          position: 'right',
-          align: 'start'
-        },
-        scales: {
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script type="text/javascript">
+
+      printDetectedCanvas();
+      printFalsePositiveCanvas();
+      printCorrectCanvas();
+
+      function printDetectedCanvas()
+      {
+        var ctx = document.getElementById('canvas_detected');
+      
+        var data =  {
+          labels: ['29/04/2020', '06/05/2020', '13/05/2020'],
+          datasets: [
+            {
+              label: 'Dishwasher',
+              fill: false,
+              borderColor: 'rgb(66, 133, 244)',
+              data: [45, 64]
+            },
+            {
+              label: 'Tumble Dryer',
+              fill: false,
+              borderColor: 'rgb(244, 180, 0)',
+              data: [49, 44]
+            },
+            {
+              label: 'Washing Machine',
+              fill: false,
+              borderColor: 'rgb(15, 157, 88)',
+              data: [80, 78]
+            },
+            {
+              label: 'Washer Dryer',
+              fill: false,
+              borderColor: 'rgb(171, 71, 188)',
+              data: [, 71]
+            },
+            {
+              label: 'Objetive',
+              borderColor: 'rgb(219, 68, 55)',
+              backgroundColor: 'rgba(219, 68, 55, 0.2)',
+              data: [80, 80, 80]
+            }
+          ]
+        }
+
+        var options = {
+          title: {
+              display: true,
+              text: 'Detected',
+              fontSize: 30,
+              fontStyle: 'bold',
+              fontColor: '#000',
+              lineHeight: 3
+          },
+          legend: {
+            position: 'right',
+            align: 'start'
+          },
+          scales: {
             yAxes: [{
                 ticks: {
                     beginAtZero: true,
                     max: 100
                 }
             }]
-        }
-      };
-      
-      var myLineChart = new Chart(ctx, {
-        type: 'line',
-        data: data,
-        options: options
-      });
+          }
+        };
+        
+        var myLineChart = new Chart(ctx, {
+          type: 'line',
+          data: data,
+          options: options
+        });
+      }
 
+      function printFalsePositiveCanvas()
+      {
+        var ctx = document.getElementById('canvas_falsepositive');
+      
+        var data =  {
+          labels: ['29/04/2020', '06/05/2020', '13/05/2020'],
+          datasets: [
+            {
+              label: 'Dishwasher',
+              fill: false,
+              borderColor: 'rgb(66, 133, 244)',
+              data: [2, 21]
+            },
+            {
+              label: 'Tumble Dryer',
+              fill: false,
+              borderColor: 'rgb(244, 180, 0)',
+              data: [4, 4]
+            },
+            {
+              label: 'Washing Machine',
+              fill: false,
+              borderColor: 'rgb(15, 157, 88)',
+              data: [13, 12]
+            },
+            {
+              label: 'Washer Dryer',
+              fill: false,
+              borderColor: 'rgb(171, 71, 188)',
+              data: [, 25]
+            },
+            {
+              label: 'Objetive',
+              fill: 'end',
+              borderColor: 'rgb(219, 68, 55)',
+              backgroundColor: 'rgba(219, 68, 55, 0.2)',
+              data: [2, 2, 2]
+            }
+          ]
+        }
+
+        var options = {
+          title: {
+              display: true,
+              text: 'False Positive',
+              fontSize: 30,
+              fontStyle: 'bold',
+              fontColor: '#000',
+              lineHeight: 3
+          },
+          legend: {
+            position: 'right',
+            align: 'start'
+          },
+          scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    max: 30
+                }
+            }]
+          }
+        };
+        
+        var myLineChart = new Chart(ctx, {
+          type: 'line',
+          data: data,
+          options: options
+        });
+      }
+
+      function printCorrectCanvas()
+      {
+        var ctx = document.getElementById('canvas_correct');
+      
+        var data =  {
+          labels: ['29/04/2020', '06/05/2020', '13/05/2020'],
+          datasets: [
+            {
+              label: 'Dishwasher',
+              fill: false,
+              borderColor: 'rgb(66, 133, 244)',
+              data: [30, 44]
+            },
+            {
+              label: 'Tumble Dryer',
+              fill: false,
+              borderColor: 'rgb(244, 180, 0)',
+              data: [45, 41]
+            },
+            {
+              label: 'Washing Machine',
+              fill: false,
+              borderColor: 'rgb(15, 157, 88)',
+              data: [86, 80]
+            },
+            {
+              label: 'Washer Dryer',
+              fill: false,
+              borderColor: 'rgb(171, 71, 188)',
+              data: [, 89]
+            },
+            {
+              label: 'Fridge',
+              fill: false,
+              borderColor: 'rgb(0, 172, 193)',
+              data: [45, 60]
+            },
+            {
+              label: 'Objetive',
+              borderColor: 'rgb(219, 68, 55)',
+              backgroundColor: 'rgba(219, 68, 55, 0.2)',
+              data: [80, 80, 80]
+            }
+          ]
+        }
+
+        var options = {
+          title: {
+              display: true,
+              text: 'Correct',
+              fontSize: 30,
+              fontStyle: 'bold',
+              fontColor: '#000',
+              lineHeight: 3
+          },
+          legend: {
+            position: 'right',
+            align: 'start'
+          },
+          scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }]
+          }
+        };
+        
+        var myLineChart = new Chart(ctx, {
+          type: 'line',
+          data: data,
+          options: options
+        });
+      }
 
     </script>
-      
-    </body>
+  </body>
 </html>
