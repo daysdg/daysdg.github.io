@@ -22,6 +22,169 @@
       printSmartCablesConnection();
       printSmartCablesPerApplianceConnection();
 
+      function printCorrectCanvas()
+      {
+        var ctx = document.getElementById('canvas_correct').getContext('2d');
+      
+        var data =  {
+          labels: ['29/04/2020', '06/05/2020', '13/05/2020'],
+          datasets: [
+            {
+              label: 'Dishwasher',
+              fill: false,
+              borderWidth: 1,
+              pointHoverRadius: 6,
+              lineTension: 0,
+              borderColor: 'rgb(66, 133, 244)',
+              backgroundColor: 'rgb(66, 133, 244)',
+              data: [30, 44, 56]
+            },
+            {
+              label: 'Tumble Dryer',
+              fill: false,
+              pointHoverRadius: 6,
+              lineTension: 0,
+              borderColor: 'rgb(244, 180, 0)',
+              backgroundColor: 'rgb(244, 180, 0)',
+              data: [45, 41, 60]
+            },
+            {
+              label: 'Washing Machine',
+              fill: false,
+              pointHoverRadius: 6,
+              lineTension: 0,
+              borderColor: 'rgb(15, 157, 88)',
+              backgroundColor: 'rgb(15, 157, 88)',
+              data: [86, 80, 84]
+            },
+            {
+              label: 'Fridge',
+              fill: false,
+              pointHoverRadius: 6,
+              lineTension: 0,
+              borderColor: 'rgb(0, 172, 193)',
+              backgroundColor: 'rgb(0, 172, 193)',
+              data: [45, 60, 62]
+            },
+            {
+              label: 'Objetive',
+              lineTension: 0,
+              pointHoverRadius: 6,
+              borderColor: 'rgb(219, 68, 55)',
+              backgroundColor: 'rgba(219, 68, 55, 0.13)',
+              data: [80, 80, 80]
+            }
+          ]
+        }
+
+        var options = {
+          title: {
+              display: true,
+              text: 'Correct Energy',
+              fontSize: 30,
+              fontStyle: 'bold',
+              fontColor: '#000',
+              lineHeight: 3
+          },
+          legend: {
+            position: 'right',
+            align: 'start',
+            labels: {
+              fontStyle: 'normal',
+              strokeStyle: 'rgb(0, 255, 0)'
+            },
+            onClick: function (event, legendItem) {
+              onClickLegendItem(event, legendItem, myLineChart)
+            },
+            onHover: function (event, legendItem) {
+              onHoverLegendItem(event, legendItem, myLineChart)
+            }
+          },
+          scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }]
+          },
+          hover: {
+						mode: 'point',
+						intersect: false,
+					}
+        };
+        
+        var myLineChart = new Chart(ctx, {
+          type: 'line',
+          data: data,
+          options: options
+        });
+
+      }
+
+      function printOthersCanvas()
+      {
+        var ctx = document.getElementById('canvas_others');
+      
+        var data =  {
+          labels: ['29/04/2020', '06/05/2020', '13/05/2020'],
+          datasets: [
+            {
+              label: 'Others',
+              fill: false,
+              pointHoverRadius: 6,
+              lineTension: 0,
+              borderColor: 'rgb(66, 133, 244)',
+              backgroundColor: 'rgb(66, 133, 244)',
+              data: [77, 64, 85]
+            },
+            {
+              label: 'Objetive',
+              pointHoverRadius: 6,
+              lineTension: 0,
+              borderColor: 'rgb(219, 68, 55)',
+              backgroundColor: 'rgba(219, 68, 55, 0.13)',
+              data: [80, 80, 80]
+            }
+          ]
+        }
+
+        var options = {
+          title: {
+              display: true,
+              text: 'Percentage of days with Others <20%',
+              fontSize: 30,
+              fontStyle: 'bold',
+              fontColor: '#000',
+              lineHeight: 3
+          },
+          legend: {
+            position: 'right',
+            align: 'start',
+            onClick: function (event, legendItem) {
+              onClickLegendItem(event, legendItem, myLineChart)
+            }
+          },
+          scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }]
+          },
+          hover: {
+						mode: 'point',
+						intersect: false,
+					}
+        };
+        
+        var myLineChart = new Chart(ctx, {
+          type: 'line',
+          data: data,
+          options: options
+        });
+      }
 
       function printDetectedCanvas()
       {
@@ -33,27 +196,34 @@
             {
               label: 'Dishwasher',
               fill: false,
-              lineTension: 0.00001,
+              pointHoverRadius: 6,
+              lineTension: 0,
               borderColor: 'rgb(66, 133, 244)',
+              backgroundColor: 'rgb(66, 133, 244)',
               data: [45, 64, 69]
             },
             {
               label: 'Tumble Dryer',
               fill: false,
-              lineTension: 0.00001,
+              pointHoverRadius: 6,
+              lineTension: 0,
               borderColor: 'rgb(244, 180, 0)',
+              backgroundColor: 'rgb(244, 180, 0)',
               data: [49, 44, 45]
             },
             {
               label: 'Washing Machine',
               fill: false,
-              lineTension: 0.00001,
+              pointHoverRadius: 6,
+              lineTension: 0,
               borderColor: 'rgb(15, 157, 88)',
+              backgroundColor: 'rgb(15, 157, 88)',
               data: [80, 78, 81]
             },
             {
               label: 'Objetive',
-              lineTension: 0.00001,
+              pointHoverRadius: 6,
+              lineTension: 0,
               borderColor: 'rgb(219, 68, 55)',
               backgroundColor: 'rgba(219, 68, 55, 0.13)',
               data: [80, 80, 80]
@@ -72,7 +242,10 @@
           },
           legend: {
             position: 'right',
-            align: 'start'
+            align: 'start',
+            onClick: function (event, legendItem) {
+              onClickLegendItem(event, legendItem, myLineChart)
+            }
           },
           scales: {
             yAxes: [{
@@ -81,7 +254,11 @@
                     max: 100
                 }
             }]
-          }
+          },
+          hover: {
+						mode: 'point',
+						intersect: false,
+					}
         };
         
         var myLineChart = new Chart(ctx, {
@@ -101,28 +278,35 @@
             {
               label: 'Dishwasher',
               fill: false,
-              lineTension: 0.00001,
+              pointHoverRadius: 6,
+              lineTension: 0,
               borderColor: 'rgb(66, 133, 244)',
+              backgroundColor: 'rgb(66, 133, 244)',
               data: [2, 21, 16]
             },
             {
               label: 'Tumble Dryer',
               fill: false,
-              lineTension: 0.00001,
+              pointHoverRadius: 6,
+              lineTension: 0,
               borderColor: 'rgb(244, 180, 0)',
+              backgroundColor: 'rgb(244, 180, 0)',
               data: [4, 4, 5]
             },
             {
               label: 'Washing Machine',
               fill: false,
-              lineTension: 0.00001,
+              pointHoverRadius: 6,
+              lineTension: 0,
               borderColor: 'rgb(15, 157, 88)',
+              backgroundColor: 'rgb(15, 157, 88)',
               data: [13, 12, 16]
             },
             {
               label: 'Objetive',
               fill: 'end',
-              lineTension: 0.00001,
+              pointHoverRadius: 6,
+              lineTension: 0,
               borderColor: 'rgb(219, 68, 55)',
               backgroundColor: 'rgba(219, 68, 55, 0.13)',
               data: [10, 10, 10]
@@ -141,82 +325,10 @@
           },
           legend: {
             position: 'right',
-            align: 'start'
-          },
-          scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true,
-                    max: 100
-                }
-            }]
-          }
-        };
-        
-        var myLineChart = new Chart(ctx, {
-          type: 'line',
-          data: data,
-          options: options
-        });
-      }
-
-      function printCorrectCanvas()
-      {
-        var ctx = document.getElementById('canvas_correct');
-      
-        var data =  {
-          labels: ['29/04/2020', '06/05/2020', '13/05/2020'],
-          datasets: [
-            {
-              label: 'Dishwasher',
-              fill: false,
-              lineTension: 0.00001,
-              borderColor: 'rgb(66, 133, 244)',
-              data: [30, 44, 56]
-            },
-            {
-              label: 'Tumble Dryer',
-              fill: false,
-              lineTension: 0.00001,
-              borderColor: 'rgb(244, 180, 0)',
-              data: [45, 41, 60]
-            },
-            {
-              label: 'Washing Machine',
-              fill: false,
-              lineTension: 0.00001,
-              borderColor: 'rgb(15, 157, 88)',
-              data: [86, 80, 84]
-            },
-            {
-              label: 'Fridge',
-              fill: false,
-              lineTension: 0.00001,
-              borderColor: 'rgb(0, 172, 193)',
-              data: [45, 60, 62]
-            },
-            {
-              label: 'Objetive',
-              lineTension: 0.00001,
-              borderColor: 'rgb(219, 68, 55)',
-              backgroundColor: 'rgba(219, 68, 55, 0.13)',
-              data: [80, 80, 80]
+            align: 'start',
+            onClick: function (event, legendItem) {
+              onClickLegendItem(event, legendItem, myLineChart)
             }
-          ]
-        }
-
-        var options = {
-          title: {
-              display: true,
-              text: 'Correct Energy',
-              fontSize: 30,
-              fontStyle: 'bold',
-              fontColor: '#000',
-              lineHeight: 3
-          },
-          legend: {
-            position: 'right',
-            align: 'start'
           },
           scales: {
             yAxes: [{
@@ -225,61 +337,11 @@
                     max: 100
                 }
             }]
-          }
-        };
-        
-        var myLineChart = new Chart(ctx, {
-          type: 'line',
-          data: data,
-          options: options
-        });
-      }
-
-      function printOthersCanvas()
-      {
-        var ctx = document.getElementById('canvas_others');
-      
-        var data =  {
-          labels: ['29/04/2020', '06/05/2020', '13/05/2020'],
-          datasets: [
-            {
-              label: 'Others',
-              fill: false,
-              lineTension: 0.00001,
-              borderColor: 'rgb(66, 133, 244)',
-              data: [77, 64, 85]
-            },
-            {
-              label: 'Objetive',
-              lineTension: 0.00001,
-              borderColor: 'rgb(219, 68, 55)',
-              backgroundColor: 'rgba(219, 68, 55, 0.13)',
-              data: [80, 80, 80]
-            }
-          ]
-        }
-
-        var options = {
-          title: {
-              display: true,
-              text: 'Percentage of days with Others <20%',
-              fontSize: 30,
-              fontStyle: 'bold',
-              fontColor: '#000',
-              lineHeight: 3
           },
-          legend: {
-            position: 'right',
-            align: 'start'
-          },
-          scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true,
-                    max: 100
-                }
-            }]
-          }
+          hover: {
+						mode: 'point',
+						intersect: false,
+					}
         };
         
         var myLineChart = new Chart(ctx, {
@@ -299,8 +361,10 @@
             {
               label: 'Connection',
               fill: false,
-              lineTension: 0.00001,
+              pointHoverRadius: 6,
+              lineTension: 0,
               borderColor: 'rgb(66, 133, 244)',
+              backgroundColor: 'rgb(66, 133, 244)',
               data: [43, 66, 93, 91, 94, 94]
             }
           ]
@@ -317,16 +381,22 @@
           },
           legend: {
             position: 'right',
-            align: 'start'
+            align: 'start',
+            onClick: function (event, legendItem) {
+              onClickLegendItem(event, legendItem, myLineChart)
+            }
           },
           scales: {
             yAxes: [{
                 ticks: {
-                    beginAtZero: true,
-                    max: 100
+                    beginAtZero: true 
                 }
             }]
-          }
+          },
+          hover: {
+						mode: 'point',
+						intersect: false,
+					}
         };
         
         var myLineChart = new Chart(ctx, {
@@ -346,29 +416,37 @@
             {
               label: 'Dishwasher',
               fill: false,
-              lineTension: 0.00001,
+              pointHoverRadius: 6,
+              lineTension: 0,
               borderColor: 'rgb(66, 133, 244)',
+              backgroundColor: 'rgb(66, 133, 244)',
               data: [9, 14, 14, 19, 19, 21]
             },
             {
               label: 'Tumble Dryer',
               fill: false,
-              lineTension: 0.00001,
+              pointHoverRadius: 6,
+              lineTension: 0,
               borderColor: 'rgb(244, 180, 0)',
+              backgroundColor: 'rgb(244, 180, 0)',
               data: [17, 28, 27, 27, 28, 28]
             },
             {
               label: 'Washing Machine',
               fill: false,
-              lineTension: 0.00001,
+              pointHoverRadius: 6,
+              lineTension: 0,
               borderColor: 'rgb(15, 157, 88)',
+              backgroundColor: 'rgb(15, 157, 88)',
               data: [12, 25, 33, 43, 44, 60]
             },
             {
               label: 'Fridge',
               fill: false,
-              lineTension: 0.00001,
+              pointHoverRadius: 6,
+              lineTension: 0,
               borderColor: 'rgb(0, 172, 193)',
+              backgroundColor: 'rgb(0, 172, 193)',
               data: [13, 25, 34, 46, 49, 49]
             }
           ]
@@ -385,16 +463,22 @@
           },
           legend: {
             position: 'right',
-            align: 'start'
+            align: 'start',
+            onClick: function (event, legendItem) {
+              onClickLegendItem(event, legendItem, myLineChart)
+            }
           },
           scales: {
             yAxes: [{
                 ticks: {
-                    beginAtZero: true,
-                    max: 100
+                    beginAtZero: true
                 }
             }]
-          }
+          },
+          hover: {
+						mode: 'point',
+						intersect: false,
+					}
         };
         
         var myLineChart = new Chart(ctx, {
@@ -402,6 +486,43 @@
           data: data,
           options: options
         });
+      }
+
+      function onHoverLegendItem(event, legendItem, chart)
+      {
+        //console.log(chart);
+        //console.log(legendItem);
+
+        //var index = legendItem.datasetIndex;
+        //var dataSet = chart.getDatasetMeta(index);
+
+        //legendItem.lineWidth = 100;
+
+        //console.log(dataSet);
+
+        /*var selectedPoint = dataSet.data[1];
+        selectedPoint.custom = selectedPoint.custom || {};
+        selectedPoint.custom.backgroundColor = 'rgba(128,128,128,1)';
+        selectedPoint.custom.radius = 7;*/
+
+        chart.update();
+      }
+
+      function onClickLegendItem(event, legendItem, chart)
+      {
+        var index = legendItem.datasetIndex;
+
+        for (let i = 0; i < chart.data.datasets.length; i++) {
+          
+          if(index == i)
+          {
+            continue;
+          }
+
+          chart.data.datasets[i].hidden = !chart.data.datasets[i].hidden;   
+        }
+
+        chart.update();
       }
 
     </script>
