@@ -7,6 +7,8 @@
       <canvas id="canvas_others"></canvas>
       <canvas id="canvas_detected"></canvas>
       <canvas id="canvas_falsepositive"></canvas>
+      <canvas id="canvas_smart_cables_connection"></canvas>
+      <canvas id="canvas_smart_cables_connection_per_appliance"></canvas>
     </div>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -17,6 +19,8 @@
       printOthersCanvas();
       printDetectedCanvas();
       printFalsePositiveCanvas();
+      printSmartCablesConnection();
+      printSmartCablesPerApplianceConnection();
 
 
       function printDetectedCanvas()
@@ -259,6 +263,121 @@
           title: {
               display: true,
               text: 'Percentage of days with Others <20%',
+              fontSize: 30,
+              fontStyle: 'bold',
+              fontColor: '#000',
+              lineHeight: 3
+          },
+          legend: {
+            position: 'right',
+            align: 'start'
+          },
+          scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }]
+          }
+        };
+        
+        var myLineChart = new Chart(ctx, {
+          type: 'line',
+          data: data,
+          options: options
+        });
+      }
+
+      function printSmartCablesConnection()
+      {
+        var ctx = document.getElementById('canvas_smart_cables_connection');
+
+        var data =  {
+          labels: ['08/04/2020', '15/04/2020', '22/04/2020', '29/04/2020', '06/05/2020', '13/05/2020'],
+          datasets: [
+            {
+              label: 'Connection',
+              fill: false,
+              lineTension: 0.00001,
+              borderColor: 'rgb(66, 133, 244)',
+              data: [43, 66, 93, 91, 94, 94]
+            }
+          ]
+        }
+
+        var options = {
+          title: {
+              display: true,
+              text: 'Smart Cables Connection',
+              fontSize: 30,
+              fontStyle: 'bold',
+              fontColor: '#000',
+              lineHeight: 3
+          },
+          legend: {
+            position: 'right',
+            align: 'start'
+          },
+          scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }]
+          }
+        };
+        
+        var myLineChart = new Chart(ctx, {
+          type: 'line',
+          data: data,
+          options: options
+        });
+      }
+
+      function printSmartCablesPerApplianceConnection()
+      {
+        var ctx = document.getElementById('canvas_smart_cables_connection_per_appliance');
+
+        var data =  {
+          labels: ['08/04/2020', '15/04/2020', '22/04/2020', '29/04/2020', '06/05/2020', '13/05/2020'],
+          datasets: [
+            {
+              label: 'Dishwasher',
+              fill: false,
+              lineTension: 0.00001,
+              borderColor: 'rgb(66, 133, 244)',
+              data: [9, 14, 14, 19, 19, 21]
+            },
+            {
+              label: 'Tumble Dryer',
+              fill: false,
+              lineTension: 0.00001,
+              borderColor: 'rgb(244, 180, 0)',
+              data: [17, 28, 27, 27, 28, 28]
+            },
+            {
+              label: 'Washing Machine',
+              fill: false,
+              lineTension: 0.00001,
+              borderColor: 'rgb(15, 157, 88)',
+              data: [12, 25, 33, 43, 44, 60]
+            },
+            {
+              label: 'Fridge',
+              fill: false,
+              lineTension: 0.00001,
+              borderColor: 'rgb(0, 172, 193)',
+              data: [13, 25, 34, 46, 49, 49]
+            }
+          ]
+        }
+
+        var options = {
+          title: {
+              display: true,
+              text: 'Smart Cables Connection Per Appliance',
               fontSize: 30,
               fontStyle: 'bold',
               fontColor: '#000',
