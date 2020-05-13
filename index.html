@@ -18,6 +18,7 @@
       printDetectedCanvas();
       printFalsePositiveCanvas();
 
+
       function printDetectedCanvas()
       {
         var ctx = document.getElementById('canvas_detected');
@@ -243,6 +244,13 @@
               lineTension: 0.00001,
               borderColor: 'rgb(66, 133, 244)',
               data: [77, 64, 85]
+            },
+            {
+              label: 'Objetive',
+              lineTension: 0.00001,
+              borderColor: 'rgb(219, 68, 55)',
+              backgroundColor: 'rgba(219, 68, 55, 0.13)',
+              data: [80, 80, 80]
             }
           ]
         }
@@ -250,7 +258,7 @@
         var options = {
           title: {
               display: true,
-              text: 'Others',
+              text: 'Percentage of days with Others <20%',
               fontSize: 30,
               fontStyle: 'bold',
               fontColor: '#000',
