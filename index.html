@@ -3,18 +3,20 @@
 
   <body>
     <div style="display: block; width: 1000px; margin-left: auto; margin-right: auto;">
+      <canvas id="canvas_correct"></canvas>
+      <canvas id="canvas_others"></canvas>
       <canvas id="canvas_detected"></canvas>
       <canvas id="canvas_falsepositive"></canvas>
-      <canvas id="canvas_correct"></canvas>
     </div>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script type="text/javascript">
 
+      printCorrectCanvas();
+      printOthersCanvas();
       printDetectedCanvas();
       printFalsePositiveCanvas();
-      printCorrectCanvas();
 
       function printDetectedCanvas()
       {
@@ -57,7 +59,7 @@
         var options = {
           title: {
               display: true,
-              text: 'Detected',
+              text: 'Detected Cycles',
               fontSize: 30,
               fontStyle: 'bold',
               fontColor: '#000',
@@ -126,7 +128,7 @@
         var options = {
           title: {
               display: true,
-              text: 'False Positive',
+              text: 'False Positive Cycles',
               fontSize: 30,
               fontStyle: 'bold',
               fontColor: '#000',
@@ -201,7 +203,54 @@
         var options = {
           title: {
               display: true,
-              text: 'Correct',
+              text: 'Correct Energy',
+              fontSize: 30,
+              fontStyle: 'bold',
+              fontColor: '#000',
+              lineHeight: 3
+          },
+          legend: {
+            position: 'right',
+            align: 'start'
+          },
+          scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }]
+          }
+        };
+        
+        var myLineChart = new Chart(ctx, {
+          type: 'line',
+          data: data,
+          options: options
+        });
+      }
+
+      function printOthersCanvas()
+      {
+        var ctx = document.getElementById('canvas_others');
+      
+        var data =  {
+          labels: ['29/04/2020', '06/05/2020', '13/05/2020'],
+          datasets: [
+            {
+              label: 'Others',
+              fill: false,
+              lineTension: 0.00001,
+              borderColor: 'rgb(66, 133, 244)',
+              data: [77, 64, 85]
+            }
+          ]
+        }
+
+        var options = {
+          title: {
+              display: true,
+              text: 'Others',
               fontSize: 30,
               fontStyle: 'bold',
               fontColor: '#000',
