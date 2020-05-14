@@ -3,6 +3,7 @@
 
   <body>
     <div style="display: block; width: 1000px; margin-left: auto; margin-right: auto;">
+      <canvas id="canvas_correctness_by_meter"></canvas>
       <canvas id="canvas_correct"></canvas>
       <canvas id="canvas_others"></canvas>
       <canvas id="canvas_detected"></canvas>
@@ -15,12 +16,107 @@
 
     <script type="text/javascript">
 
+      function Color(red, green, blue, alpha) {
+        this.red = red;
+        this.green = green;
+        this.blue = blue; 
+        this.alpha = alpha;
+        this.toString = () => `rgb(${this.red}, ${this.green}, ${this.blue}, ${this.alpha})`;
+      }
+
+      const blue = new Color(66, 133, 244, 1);
+      const yellow = new Color(244, 180, 0, 1);
+      const green = new Color(15, 157, 88, 1);
+      const purple = new Color(171, 71, 188, 1);
+      const red = new Color(219, 68, 55, 1);
+      const lightRed = new Color(219, 68, 55, 0.12);
+
+      printCorrectnessByMeter();
       printCorrectCanvas();
       printOthersCanvas();
       printDetectedCanvas();
       printFalsePositiveCanvas();
       printSmartCablesConnection();
       printSmartCablesPerApplianceConnection();
+
+
+
+      function printCorrectnessByMeter()
+      {
+        var ctx = document.getElementById('canvas_correctness_by_meter');
+      
+        var data =  {
+          labels: ['bffa', '237e', 'f4a6'],
+          datasets: [
+            {
+              label: 'Prct Correct Days',
+              fill: false,
+              pointHoverRadius: 6,
+              lineTension: 0,
+              borderColor: 'rgb(66, 133, 244)',
+              backgroundColor: 'rgb(66, 133, 244)',
+              data: [35.89, 52.63, 88.23]
+            },
+            {
+              label: 'Number of Days',
+              fill: false,
+              pointHoverRadius: 6,
+              lineTension: 0,
+              borderColor: 'rgb(66, 133, 244)',
+              backgroundColor: 'rgb(66, 133, 244)',
+              data: [39, 19, 17]
+            },
+            {
+              label: 'Objetive',
+              pointHoverRadius: 6,
+              lineTension: 0,
+              borderColor: 'rgb(219, 68, 55)',
+              backgroundColor: 'rgba(219, 68, 55, 0.13)',
+              data: [80, 80, 80]
+            }
+          ]
+        }
+
+        var options = {
+          title: {
+              display: true,
+              text: 'Dishwasher',
+              fontSize: 30,
+              fontStyle: 'bold',
+              fontColor: '#000',
+              lineHeight: 3
+          },
+          legend: {
+            position: 'right',
+            align: 'start',
+            onClick: function (event, legendItem) {
+              onClickLegendItem(event, legendItem, myLineChart)
+            }
+          },
+          scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }]
+          },
+          hover: {
+						mode: 'point',
+						intersect: false,
+					}
+        };
+        
+        var myLineChart = new Chart(ctx, {
+          type: 'bar',
+          data: data,
+          options: options
+        });
+      }
+
+
+
+
 
       function printCorrectCanvas()
       {
@@ -32,46 +128,61 @@
             {
               label: 'Dishwasher',
               fill: false,
-              borderWidth: 1,
               pointHoverRadius: 6,
+              borderWidth: 2,
               lineTension: 0,
-              borderColor: 'rgb(66, 133, 244)',
-              backgroundColor: 'rgb(66, 133, 244)',
+              selected: false,
+              color: blue,
+              borderColor: blue.toString(),
+              backgroundColor: blue.toString(),
               data: [30, 44, 56]
             },
             {
               label: 'Tumble Dryer',
               fill: false,
               pointHoverRadius: 6,
+              borderWidth: 2,
               lineTension: 0,
-              borderColor: 'rgb(244, 180, 0)',
-              backgroundColor: 'rgb(244, 180, 0)',
+              selected: false,
+              color: yellow,
+              borderColor: yellow.toString(),
+              backgroundColor: yellow.toString(),
               data: [45, 41, 60]
             },
             {
               label: 'Washing Machine',
               fill: false,
               pointHoverRadius: 6,
+              borderWidth: 2,
               lineTension: 0,
-              borderColor: 'rgb(15, 157, 88)',
-              backgroundColor: 'rgb(15, 157, 88)',
+              selected: false,
+              color: green,
+              borderColor: green.toString(),
+              backgroundColor: green.toString(),
               data: [86, 80, 84]
             },
             {
               label: 'Fridge',
               fill: false,
               pointHoverRadius: 6,
+              borderWidth: 2,
               lineTension: 0,
-              borderColor: 'rgb(0, 172, 193)',
-              backgroundColor: 'rgb(0, 172, 193)',
+              selected: false,
+              color: purple,
+              borderColor: purple.toString(),
+              backgroundColor: purple.toString(),
               data: [45, 60, 62]
             },
             {
               label: 'Objetive',
+              borderWidth: 2,
               lineTension: 0,
               pointHoverRadius: 6,
-              borderColor: 'rgb(219, 68, 55)',
-              backgroundColor: 'rgba(219, 68, 55, 0.13)',
+              selected: false,
+              color: red,
+              colorBackground: lightRed,
+              borderColor: red.toString(),
+              backgroundColor: lightRed.toString(),
               data: [80, 80, 80]
             }
           ]
@@ -98,6 +209,9 @@
             },
             onHover: function (event, legendItem) {
               onHoverLegendItem(event, legendItem, myLineChart)
+            },
+            onLeave: function (event, legendItem) {
+              onLeaveLegendItem(event, legendItem, myLineChart)
             }
           },
           scales: {
@@ -133,17 +247,24 @@
               label: 'Others',
               fill: false,
               pointHoverRadius: 6,
+              borderWidth: 2,
               lineTension: 0,
-              borderColor: 'rgb(66, 133, 244)',
-              backgroundColor: 'rgb(66, 133, 244)',
+              selected: false,
+              color: blue,
+              borderColor: blue.toString(),
+              backgroundColor: blue.toString(),
               data: [77, 64, 85]
             },
             {
               label: 'Objetive',
-              pointHoverRadius: 6,
+              borderWidth: 2,
               lineTension: 0,
-              borderColor: 'rgb(219, 68, 55)',
-              backgroundColor: 'rgba(219, 68, 55, 0.13)',
+              pointHoverRadius: 6,
+              selected: false,
+              color: red,
+              colorBackground: lightRed,
+              borderColor: red.toString(),
+              backgroundColor: lightRed.toString(),
               data: [80, 80, 80]
             }
           ]
@@ -163,6 +284,12 @@
             align: 'start',
             onClick: function (event, legendItem) {
               onClickLegendItem(event, legendItem, myLineChart)
+            },
+            onHover: function (event, legendItem) {
+              onHoverLegendItem(event, legendItem, myLineChart)
+            },
+            onLeave: function (event, legendItem) {
+              onLeaveLegendItem(event, legendItem, myLineChart)
             }
           },
           scales: {
@@ -197,35 +324,48 @@
               label: 'Dishwasher',
               fill: false,
               pointHoverRadius: 6,
+              borderWidth: 2,
               lineTension: 0,
-              borderColor: 'rgb(66, 133, 244)',
-              backgroundColor: 'rgb(66, 133, 244)',
+              selected: false,
+              color: blue,
+              borderColor: blue.toString(),
+              backgroundColor: blue.toString(),
               data: [45, 64, 69]
             },
             {
               label: 'Tumble Dryer',
               fill: false,
               pointHoverRadius: 6,
+              borderWidth: 2,
               lineTension: 0,
-              borderColor: 'rgb(244, 180, 0)',
-              backgroundColor: 'rgb(244, 180, 0)',
+              selected: false,
+              color: yellow,
+              borderColor: yellow.toString(),
+              backgroundColor: yellow.toString(),
               data: [49, 44, 45]
             },
             {
               label: 'Washing Machine',
               fill: false,
               pointHoverRadius: 6,
+              borderWidth: 2,
               lineTension: 0,
-              borderColor: 'rgb(15, 157, 88)',
-              backgroundColor: 'rgb(15, 157, 88)',
+              selected: false,
+              color: green,
+              borderColor: green.toString(),
+              backgroundColor: green.toString(),
               data: [80, 78, 81]
             },
             {
               label: 'Objetive',
-              pointHoverRadius: 6,
+              borderWidth: 2,
               lineTension: 0,
-              borderColor: 'rgb(219, 68, 55)',
-              backgroundColor: 'rgba(219, 68, 55, 0.13)',
+              pointHoverRadius: 6,
+              selected: false,
+              color: red,
+              colorBackground: lightRed,
+              borderColor: red.toString(),
+              backgroundColor: lightRed.toString(),
               data: [80, 80, 80]
             }
           ]
@@ -245,6 +385,12 @@
             align: 'start',
             onClick: function (event, legendItem) {
               onClickLegendItem(event, legendItem, myLineChart)
+            },
+            onHover: function (event, legendItem) {
+              onHoverLegendItem(event, legendItem, myLineChart)
+            },
+            onLeave: function (event, legendItem) {
+              onLeaveLegendItem(event, legendItem, myLineChart)
             }
           },
           scales: {
@@ -279,36 +425,49 @@
               label: 'Dishwasher',
               fill: false,
               pointHoverRadius: 6,
+              borderWidth: 2,
               lineTension: 0,
-              borderColor: 'rgb(66, 133, 244)',
-              backgroundColor: 'rgb(66, 133, 244)',
+              selected: false,
+              color: blue,
+              borderColor: blue.toString(),
+              backgroundColor: blue.toString(),
               data: [2, 21, 16]
             },
             {
               label: 'Tumble Dryer',
               fill: false,
               pointHoverRadius: 6,
+              borderWidth: 2,
               lineTension: 0,
-              borderColor: 'rgb(244, 180, 0)',
-              backgroundColor: 'rgb(244, 180, 0)',
+              selected: false,
+              color: yellow,
+              borderColor: yellow.toString(),
+              backgroundColor: yellow.toString(),
               data: [4, 4, 5]
             },
             {
               label: 'Washing Machine',
               fill: false,
               pointHoverRadius: 6,
+              borderWidth: 2,
               lineTension: 0,
-              borderColor: 'rgb(15, 157, 88)',
-              backgroundColor: 'rgb(15, 157, 88)',
+              selected: false,
+              color: green,
+              borderColor: green.toString(),
+              backgroundColor: green.toString(),
               data: [13, 12, 16]
             },
             {
               label: 'Objetive',
               fill: 'end',
-              pointHoverRadius: 6,
+              borderWidth: 2,
               lineTension: 0,
-              borderColor: 'rgb(219, 68, 55)',
-              backgroundColor: 'rgba(219, 68, 55, 0.13)',
+              pointHoverRadius: 6,
+              selected: false,
+              color: red,
+              colorBackground: lightRed,
+              borderColor: red.toString(),
+              backgroundColor: lightRed.toString(),
               data: [10, 10, 10]
             }
           ]
@@ -328,6 +487,12 @@
             align: 'start',
             onClick: function (event, legendItem) {
               onClickLegendItem(event, legendItem, myLineChart)
+            },
+            onHover: function (event, legendItem) {
+              onHoverLegendItem(event, legendItem, myLineChart)
+            },
+            onLeave: function (event, legendItem) {
+              onLeaveLegendItem(event, legendItem, myLineChart)
             }
           },
           scales: {
@@ -362,9 +527,12 @@
               label: 'Connection',
               fill: false,
               pointHoverRadius: 6,
+              borderWidth: 2,
               lineTension: 0,
-              borderColor: 'rgb(66, 133, 244)',
-              backgroundColor: 'rgb(66, 133, 244)',
+              selected: false,
+              color: blue,
+              borderColor: blue.toString(),
+              backgroundColor: blue.toString(),
               data: [43, 66, 93, 91, 94, 94]
             }
           ]
@@ -384,6 +552,12 @@
             align: 'start',
             onClick: function (event, legendItem) {
               onClickLegendItem(event, legendItem, myLineChart)
+            },
+            onHover: function (event, legendItem) {
+              onHoverLegendItem(event, legendItem, myLineChart)
+            },
+            onLeave: function (event, legendItem) {
+              onLeaveLegendItem(event, legendItem, myLineChart)
             }
           },
           scales: {
@@ -417,36 +591,48 @@
               label: 'Dishwasher',
               fill: false,
               pointHoverRadius: 6,
+              borderWidth: 2,
               lineTension: 0,
-              borderColor: 'rgb(66, 133, 244)',
-              backgroundColor: 'rgb(66, 133, 244)',
+              selected: false,
+              color: blue,
+              borderColor: blue.toString(),
+              backgroundColor: blue.toString(),
               data: [9, 14, 14, 19, 19, 21]
             },
             {
               label: 'Tumble Dryer',
               fill: false,
               pointHoverRadius: 6,
+              borderWidth: 2,
               lineTension: 0,
-              borderColor: 'rgb(244, 180, 0)',
-              backgroundColor: 'rgb(244, 180, 0)',
+              selected: false,
+              color: yellow,
+              borderColor: yellow.toString(),
+              backgroundColor: yellow.toString(),
               data: [17, 28, 27, 27, 28, 28]
             },
             {
               label: 'Washing Machine',
               fill: false,
               pointHoverRadius: 6,
+              borderWidth: 2,
               lineTension: 0,
-              borderColor: 'rgb(15, 157, 88)',
-              backgroundColor: 'rgb(15, 157, 88)',
+              selected: false,
+              color: green,
+              borderColor: green.toString(),
+              backgroundColor: green.toString(),
               data: [12, 25, 33, 43, 44, 60]
             },
             {
               label: 'Fridge',
               fill: false,
               pointHoverRadius: 6,
+              borderWidth: 2,
               lineTension: 0,
-              borderColor: 'rgb(0, 172, 193)',
-              backgroundColor: 'rgb(0, 172, 193)',
+              selected: false,
+              color: purple,
+              borderColor: purple.toString(),
+              backgroundColor: purple.toString(),
               data: [13, 25, 34, 46, 49, 49]
             }
           ]
@@ -466,6 +652,12 @@
             align: 'start',
             onClick: function (event, legendItem) {
               onClickLegendItem(event, legendItem, myLineChart)
+            },
+            onHover: function (event, legendItem) {
+              onHoverLegendItem(event, legendItem, myLineChart)
+            },
+            onLeave: function (event, legendItem) {
+              onLeaveLegendItem(event, legendItem, myLineChart)
             }
           },
           scales: {
@@ -490,20 +682,21 @@
 
       function onHoverLegendItem(event, legendItem, chart)
       {
-        //console.log(chart);
-        //console.log(legendItem);
+        var index = legendItem.datasetIndex;
+        var dataSet = chart.data.datasets[index];
 
-        //var index = legendItem.datasetIndex;
-        //var dataSet = chart.getDatasetMeta(index);
+        dataSet.borderWidth = 6;
 
-        //legendItem.lineWidth = 100;
+        chart.update();
+      }
 
-        //console.log(dataSet);
+      function onLeaveLegendItem(event, legendItem, chart)
+      {
+        var index = legendItem.datasetIndex;
+        var dataSet = chart.data.datasets[index];
 
-        /*var selectedPoint = dataSet.data[1];
-        selectedPoint.custom = selectedPoint.custom || {};
-        selectedPoint.custom.backgroundColor = 'rgba(128,128,128,1)';
-        selectedPoint.custom.radius = 7;*/
+        if(!dataSet.selected)
+          dataSet.borderWidth = 2;
 
         chart.update();
       }
@@ -511,18 +704,85 @@
       function onClickLegendItem(event, legendItem, chart)
       {
         var index = legendItem.datasetIndex;
+        var dataSet = chart.getDatasetMeta(index);
+        var dataSetSelected = dataSet.controller._config.selected;
+
 
         for (let i = 0; i < chart.data.datasets.length; i++) {
-          
-          if(index == i)
+
+          var colorAlpha = 1;
+          var colorBackgroundAlpha = 0.12;
+          var borderWidth = 2;
+          var selected = false;
+
+          var color = chart.data.datasets[i].color;
+          var colorBackground = chart.data.datasets[i].colorBackground;
+
+          if(dataSetSelected)
           {
-            continue;
+            colorAlpha = 1;
+            colorBackgroundAlpha = 0.12;
+            borderWidth = 2;
+            selected = false;
+
+            //HideTooltipsOfSelectedDataSet(chart, dataSet);
+          }
+          else
+          {
+            if(index == i)
+            {
+              colorAlpha = 1;
+              colorBackgroundAlpha = 0.12;
+              borderWidth = 6;
+              selected = true;
+
+              //ShowTooltipsOfSelectedDataSet(chart, dataSet);
+            } 
+            else
+            {
+              colorAlpha = 0.2;
+              colorBackgroundAlpha = 0.05;
+              borderWidth = 2;
+              selected = false;
+            }
           }
 
-          chart.data.datasets[i].hidden = !chart.data.datasets[i].hidden;   
+          chart.data.datasets[i].selected = selected;
+          chart.data.datasets[i].borderWidth = borderWidth;
+
+          color.alpha = colorAlpha;
+          chart.data.datasets[i].color = color;
+          chart.data.datasets[i].borderColor = color.toString();
+
+          if(colorBackground == null)
+          {
+            chart.data.datasets[i].backgroundColor = color.toString();
+          }
+          else
+          {
+            colorBackground.alpha = colorBackgroundAlpha;
+            chart.data.datasets[i].colorBackground = colorBackground;
+            chart.data.datasets[i].backgroundColor = colorBackground.toString();
+          }
         }
 
         chart.update();
+      }
+
+      function ShowTooltipsOfSelectedDataSet(chart, dataSet)
+      {
+        if(chart.tooltip._active == undefined)
+          chart.tooltip._active = [];
+
+        for (let i = 0; i < dataSet.data.length; i++) {
+
+          console.log(dataSet.data[i]);
+
+
+          chart.tooltip._active.push(dataSet.data[i]);
+        }
+
+        chart.tooltip.update(true);
       }
 
     </script>
