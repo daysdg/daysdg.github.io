@@ -3,13 +3,18 @@
 
   <body>
     <div style="display: block; width: 1000px; margin-left: auto; margin-right: auto;">
-      <canvas id="canvas_correctness_by_meter"></canvas>
+
       <canvas id="canvas_correct"></canvas>
       <canvas id="canvas_others"></canvas>
       <canvas id="canvas_detected"></canvas>
       <canvas id="canvas_falsepositive"></canvas>
       <canvas id="canvas_smart_cables_connection"></canvas>
       <canvas id="canvas_smart_cables_connection_per_appliance"></canvas>
+
+      <canvas id="canvas_correctness_by_meter_dishwasher"></canvas>
+      <canvas id="canvas_correctness_by_meter_fridge"></canvas>
+      <canvas id="canvas_correctness_by_meter_tumble_dryer"></canvas>
+      <canvas id="canvas_correctness_by_meter_washing_machine"></canvas>
     </div>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -31,7 +36,6 @@
       const red = new Color(219, 68, 55, 1);
       const lightRed = new Color(219, 68, 55, 0.12);
 
-      printCorrectnessByMeter();
       printCorrectCanvas();
       printOthersCanvas();
       printDetectedCanvas();
@@ -39,82 +43,10 @@
       printSmartCablesConnection();
       printSmartCablesPerApplianceConnection();
 
-
-
-      function printCorrectnessByMeter()
-      {
-        var ctx = document.getElementById('canvas_correctness_by_meter');
-      
-        var data =  {
-          labels: ['bffa', '237e', 'f4a6'],
-          datasets: [
-            {
-              label: 'Prct Correct Days',
-              fill: false,
-              pointHoverRadius: 6,
-              lineTension: 0,
-              borderColor: 'rgb(66, 133, 244)',
-              backgroundColor: 'rgb(66, 133, 244)',
-              data: [35.89, 52.63, 88.23]
-            },
-            {
-              label: 'Number of Days',
-              fill: false,
-              pointHoverRadius: 6,
-              lineTension: 0,
-              borderColor: 'rgb(66, 133, 244)',
-              backgroundColor: 'rgb(66, 133, 244)',
-              data: [39, 19, 17]
-            },
-            {
-              label: 'Objetive',
-              pointHoverRadius: 6,
-              lineTension: 0,
-              borderColor: 'rgb(219, 68, 55)',
-              backgroundColor: 'rgba(219, 68, 55, 0.13)',
-              data: [80, 80, 80]
-            }
-          ]
-        }
-
-        var options = {
-          title: {
-              display: true,
-              text: 'Dishwasher',
-              fontSize: 30,
-              fontStyle: 'bold',
-              fontColor: '#000',
-              lineHeight: 3
-          },
-          legend: {
-            position: 'right',
-            align: 'start',
-            onClick: function (event, legendItem) {
-              onClickLegendItem(event, legendItem, myLineChart)
-            }
-          },
-          scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true,
-                    max: 100
-                }
-            }]
-          },
-          hover: {
-						mode: 'point',
-						intersect: false,
-					}
-        };
-        
-        var myLineChart = new Chart(ctx, {
-          type: 'bar',
-          data: data,
-          options: options
-        });
-      }
-
-
+      printCorrectnessByMeterDishwasher();
+      printCorrectnessByMeterFridge();
+      printCorrectnessByMeterTumbleDryer();
+      printCorrectnessByMeterWashingMachine();
 
 
 
@@ -680,12 +612,486 @@
         });
       }
 
+
+
+      function printCorrectnessByMeterDishwasher()
+      {
+        var ctx = document.getElementById('canvas_smart_cables_connection_per_appliance');
+      
+        var data =  {
+          labels: ['bffa', '237e', 'fef3', 'f4a6'],
+          datasets: [
+            {
+              label: 'Percentage Correct Days',
+              selected: false,
+              barThickness: 'flex',
+              yAxisID: 'y-axis-prctg-correct-days-objective',
+              barPercentage: 0.8,
+              color: blue,
+              backgroundColor: blue.toString(),
+              data: [35.89, 52.63, 73.68, 88.23]
+            },
+            {
+              label: 'Number of Days',
+              selected: false,
+              yAxisID: 'y-axis-number-day-number-correct-days',
+              barPercentage: 0.8,
+              color: yellow,
+              backgroundColor: yellow.toString(),
+              data: [39, 19, 19, 17]
+            },
+            {
+              label: 'Number Correct Days',
+              selected: false,
+              yAxisID: 'y-axis-number-day-number-correct-days',
+              barPercentage: 0.8,
+              color: green,
+              backgroundColor: green.toString(),
+              data: [14, 10, 14, 15]
+            },
+            {
+              label: 'Objetive',
+              yAxisID: 'y-axis-prctg-correct-days-objective',
+              type: 'line',
+              borderWidth: 2,
+              lineTension: 0,
+              pointHoverRadius: 6,
+              selected: false,
+              color: red,
+              colorBackground: lightRed,
+              borderColor: red.toString(),
+              backgroundColor: lightRed.toString(),
+              data: [80, 80, 80, 80]
+            }
+          ]
+        }
+
+        var options = {
+          title: {
+              display: true,
+              text: 'Dishwasher',
+              fontSize: 30,
+              fontStyle: 'bold',
+              fontColor: '#000',
+              lineHeight: 3
+          },
+          legend: {
+            position: 'right',
+            align: 'start',
+            labels: {
+              //fontStyle: 'bolder'
+              fontWeight: 500
+            },
+            onClick: function (event, legendItem) {
+              onClickLegendItem(event, legendItem, myLineChart)
+            },
+            onHover: function (event, legendItem) {
+              onHoverLegendItem(event, legendItem, myLineChart)
+            },
+            onLeave: function (event, legendItem) {
+              onLeaveLegendItem(event, legendItem, myLineChart)
+            }
+          },
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                    beginAtZero: true,
+                    max: 100
+                },
+                display: true,
+                position: 'left',
+                id: 'y-axis-prctg-correct-days-objective'
+              },
+              {
+                ticks: {
+                    beginAtZero: true,
+                    max: 50
+                },
+                display: true,
+                position: 'right',
+                id: 'y-axis-number-day-number-correct-days'
+              }
+            ]
+          },
+          hover: {
+						mode: 'point',
+						intersect: false,
+					}
+        };
+        
+        var myLineChart = new Chart(ctx, {
+          type: 'bar',
+          data: data,
+          options: options
+        });
+      }
+
+      function printCorrectnessByMeterFridge()
+      {
+        var ctx = document.getElementById('canvas_correctness_by_meter_fridge');
+      
+        var data =  {
+          labels: ['fef3', '8fe1', '56d6', '78f9', 'b3e9', '4473', '4ec4', 'f4a6'],
+          datasets: [
+            {
+              label: 'Percentage Correct Days',
+              selected: false,
+              barThickness: 'flex',
+              yAxisID: 'y-axis-prctg-correct-days-objective',
+              barPercentage: 0.8,
+              color: blue,
+              backgroundColor: blue.toString(),
+              data: [2.56, 47.36, 68, 78.26, 89.18, 91.30, 100, 100]
+            },
+            {
+              label: 'Number of Days',
+              selected: false,
+              yAxisID: 'y-axis-number-day-number-correct-days',
+              barPercentage: 0.8,
+              color: yellow,
+              backgroundColor: yellow.toString(),
+              data: [39, 38, 25, 23, 37, 23, 1, 18]
+            },
+            {
+              label: 'Number Correct Days',
+              selected: false,
+              yAxisID: 'y-axis-number-day-number-correct-days',
+              barPercentage: 0.8,
+              color: green,
+              backgroundColor: green.toString(),
+              data: [1, 18, 17, 18, 33, 21, 1, 18]
+            },
+            {
+              label: 'Objetive',
+              yAxisID: 'y-axis-prctg-correct-days-objective',
+              type: 'line',
+              borderWidth: 2,
+              lineTension: 0,
+              pointHoverRadius: 6,
+              selected: false,
+              color: red,
+              colorBackground: lightRed,
+              borderColor: red.toString(),
+              backgroundColor: lightRed.toString(),
+              data: [80, 80, 80, 80, 80, 80, 80, 80]
+            }
+          ]
+        }
+
+        var options = {
+          title: {
+              display: true,
+              text: 'Fridge',
+              fontSize: 30,
+              fontStyle: 'bold',
+              fontColor: '#000',
+              lineHeight: 3
+          },
+          legend: {
+            position: 'right',
+            align: 'start',
+            labels: {
+              //fontStyle: 'bolder'
+              fontWeight: 500
+            },
+            onClick: function (event, legendItem) {
+              onClickLegendItem(event, legendItem, myLineChart)
+            },
+            onHover: function (event, legendItem) {
+              onHoverLegendItem(event, legendItem, myLineChart)
+            },
+            onLeave: function (event, legendItem) {
+              onLeaveLegendItem(event, legendItem, myLineChart)
+            }
+          },
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                    beginAtZero: true,
+                    max: 100
+                },
+                display: true,
+                position: 'left',
+                id: 'y-axis-prctg-correct-days-objective'
+              },
+              {
+                ticks: {
+                    beginAtZero: true,
+                    max: 50
+                },
+                display: true,
+                position: 'right',
+                id: 'y-axis-number-day-number-correct-days'
+              }
+            ]
+          },
+          hover: {
+						mode: 'point',
+						intersect: false,
+					}
+        };
+        
+        var myLineChart = new Chart(ctx, {
+          type: 'bar',
+          data: data,
+          options: options
+        });
+      }
+
+      function printCorrectnessByMeterTumbleDryer()
+      {
+        var ctx = document.getElementById('canvas_correctness_by_meter_tumble_dryer');
+      
+        var data =  {
+          labels: ['b3e9', '237e', 'fef3', '8575'],
+          datasets: [
+            {
+              label: 'Percentage Correct Days',
+              selected: false,
+              barThickness: 'flex',
+              yAxisID: 'y-axis-prctg-correct-days-objective',
+              barPercentage: 0.8,
+              color: blue,
+              backgroundColor: blue.toString(),
+              data: [18.91, 40.54, 82.05, 97.5]
+            },
+            {
+              label: 'Number of Days',
+              selected: false,
+              yAxisID: 'y-axis-number-day-number-correct-days',
+              barPercentage: 0.8,
+              color: yellow,
+              backgroundColor: yellow.toString(),
+              data: [37, 37, 39, 40]
+            },
+            {
+              label: 'Number Correct Days',
+              selected: false,
+              yAxisID: 'y-axis-number-day-number-correct-days',
+              barPercentage: 0.8,
+              color: green,
+              backgroundColor: green.toString(),
+              data: [7, 15, 32, 39]
+            },
+            {
+              label: 'Objetive',
+              yAxisID: 'y-axis-prctg-correct-days-objective',
+              type: 'line',
+              borderWidth: 2,
+              lineTension: 0,
+              pointHoverRadius: 6,
+              selected: false,
+              color: red,
+              colorBackground: lightRed,
+              borderColor: red.toString(),
+              backgroundColor: lightRed.toString(),
+              data: [80, 80, 80, 80]
+            }
+          ]
+        }
+
+        var options = {
+          title: {
+              display: true,
+              text: 'Tumble Dryer',
+              fontSize: 30,
+              fontStyle: 'bold',
+              fontColor: '#000',
+              lineHeight: 3
+          },
+          legend: {
+            position: 'right',
+            align: 'start',
+            labels: {
+              //fontStyle: 'bolder'
+              fontWeight: 500
+            },
+            onClick: function (event, legendItem) {
+              onClickLegendItem(event, legendItem, myLineChart)
+            },
+            onHover: function (event, legendItem) {
+              onHoverLegendItem(event, legendItem, myLineChart)
+            },
+            onLeave: function (event, legendItem) {
+              onLeaveLegendItem(event, legendItem, myLineChart)
+            }
+          },
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                    beginAtZero: true,
+                    max: 100
+                },
+                display: true,
+                position: 'left',
+                id: 'y-axis-prctg-correct-days-objective'
+              },
+              {
+                ticks: {
+                    beginAtZero: true,
+                    max: 50
+                },
+                display: true,
+                position: 'right',
+                id: 'y-axis-number-day-number-correct-days'
+              }
+            ]
+          },
+          hover: {
+						mode: 'point',
+						intersect: false,
+					}
+        };
+        
+        var myLineChart = new Chart(ctx, {
+          type: 'bar',
+          data: data,
+          options: options
+        });
+      }
+
+      function printCorrectnessByMeterWashingMachine()
+      {
+        var ctx = document.getElementById('canvas_correctness_by_meter_washing_machine');
+      
+        var data =  {
+          labels: ['fef3', '302d', '78f9', 'fda4', 'da77', 'c72f', '237e', '56d6', '8fe1', 'f4a6', '4ec4'],
+          datasets: [
+            {
+              label: 'Percentage Correct Days',
+              selected: false,
+              barThickness: 'flex',
+              yAxisID: 'y-axis-prctg-correct-days-objective',
+              barPercentage: 0.8,
+              color: blue,
+              backgroundColor: blue.toString(),
+              data: [30, 50, 50, 66.66, 83.33, 86.84, 89.47, 92.30, 92.30, 94.44, 100]
+            },
+            {
+              label: 'Number of Days',
+              selected: false,
+              yAxisID: 'y-axis-number-day-number-correct-days',
+              barPercentage: 0.8,
+              color: yellow,
+              backgroundColor: yellow.toString(),
+              data: [10, 8, 4, 3, 18, 38, 19, 39, 39, 18, 1]
+            },
+            {
+              label: 'Number Correct Days',
+              selected: false,
+              yAxisID: 'y-axis-number-day-number-correct-days',
+              barPercentage: 0.8,
+              color: green,
+              backgroundColor: green.toString(),
+              data: [3, 4, 2, 2, 15, 33, 17, 36, 36, 17, 1]
+            },
+            {
+              label: 'Objetive',
+              yAxisID: 'y-axis-prctg-correct-days-objective',
+              type: 'line',
+              borderWidth: 2,
+              lineTension: 0,
+              pointHoverRadius: 6,
+              selected: false,
+              color: red,
+              colorBackground: lightRed,
+              borderColor: red.toString(),
+              backgroundColor: lightRed.toString(),
+              data: [80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80]
+            }
+          ]
+        }
+
+        var options = {
+          title: {
+              display: true,
+              text: 'Washing Machine',
+              fontSize: 30,
+              fontStyle: 'bold',
+              fontColor: '#000',
+              lineHeight: 3
+          },
+          legend: {
+            position: 'right',
+            align: 'start',
+            labels: {
+              //fontStyle: 'bolder'
+              fontWeight: 500
+            },
+            onClick: function (event, legendItem) {
+              onClickLegendItem(event, legendItem, myLineChart)
+            },
+            onHover: function (event, legendItem) {
+              onHoverLegendItem(event, legendItem, myLineChart)
+            },
+            onLeave: function (event, legendItem) {
+              onLeaveLegendItem(event, legendItem, myLineChart)
+            }
+          },
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                    beginAtZero: true,
+                    max: 100
+                },
+                display: true,
+                position: 'left',
+                id: 'y-axis-prctg-correct-days-objective'
+              },
+              {
+                ticks: {
+                    beginAtZero: true,
+                    max: 50
+                },
+                display: true,
+                position: 'right',
+                id: 'y-axis-number-day-number-correct-days'
+              }
+            ]
+          },
+          hover: {
+						mode: 'point',
+						intersect: false,
+					}
+        };
+        
+        var myLineChart = new Chart(ctx, {
+          type: 'bar',
+          data: data,
+          options: options
+        });
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
       function onHoverLegendItem(event, legendItem, chart)
       {
         var index = legendItem.datasetIndex;
         var dataSet = chart.data.datasets[index];
+        var ds = chart.getDatasetMeta(index);
 
-        dataSet.borderWidth = 6;
+        if(dataSet.barPercentage != null)
+        {
+          dataSet.barPercentage = 1;
+        }
+        else if(dataSet.borderWidth != null)
+        {
+          dataSet.borderWidth = 6;
+        }
 
         chart.update();
       }
@@ -696,7 +1102,16 @@
         var dataSet = chart.data.datasets[index];
 
         if(!dataSet.selected)
-          dataSet.borderWidth = 2;
+        {
+          if(dataSet.barPercentage != null)
+          {
+            dataSet.barPercentage = 0.8;
+          }
+          else if(dataSet.borderWidth != null)
+          {
+            dataSet.borderWidth = 2;
+          }
+        } 
 
         chart.update();
       }
@@ -706,7 +1121,6 @@
         var index = legendItem.datasetIndex;
         var dataSet = chart.getDatasetMeta(index);
         var dataSetSelected = dataSet.controller._config.selected;
-
 
         for (let i = 0; i < chart.data.datasets.length; i++) {
 
@@ -783,6 +1197,27 @@
         }
 
         chart.tooltip.update(true);
+      }
+
+      function HideTooltipsOfSelectedDataSet(chart, dataSet)
+      {
+        var activeElements = chart.tooltip._active;
+
+        if(chart.tooltip._active == undefined || chart.tooltip._active.length == 0)
+        {
+          return;
+        }
+
+        var requestedElem = chart.getDatasetMeta(datasetIndex).data[pointIndex];
+        for(var i = 0; i < activeElements.length; i++) {
+            if(requestedElem._index == activeElements[i]._index)  {
+                activeElements.splice(i, 1);
+                break;
+            }
+        }
+        chart.tooltip._active = activeElements;
+        chart.tooltip.update(true);
+        chart.draw();
       }
 
     </script>
