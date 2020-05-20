@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html style="display: block; height: 4154px">
 
-  <body onload="updateIframeHeight()">
+  <body>
     <div style="display: block; width: 1000px; margin-left: auto; margin-right: auto;" id="plots">
 
       <canvas id="canvas_correct"></canvas>
@@ -48,6 +48,8 @@
       printCorrectnessByMeterDishwasher();
       printCorrectnessByMeterFridge();
       printCorrectnessByMeterTumbleDryer();
+
+      updateIframeHeight();
 
 
 /*---------------- KIPs overviews ----------------*/
@@ -1054,9 +1056,9 @@
         var plots = document.getElementById('plots');
         var plotsStyle = getComputedStyle(plots);
 
-        console.log('Plot Height 2: ' + plotsStyle.height);
+        console.log('Plot Height 3: ' + plotsStyle.height);
 
-        //window.parent.document.getElementById
+        /*
         var iFrameID = window.parent.document.getElementById('iframe_plots');
 
         if(iFrameID) {
@@ -1067,7 +1069,7 @@
 
           iFrameID.height = "";
           iFrameID.height = plotsStyle.height;
-        }
+        }*/
       }
 
 
