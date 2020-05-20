@@ -57,7 +57,7 @@
         var ctx = document.getElementById('canvas_correct').getContext('2d');
       
         var data =  {
-          labels: ['29/04/2020', '06/05/2020', '13/05/2020', '20-05-2020'],
+          labels: ['29/04/2020', '06/05/2020', '13/05/2020', '20/05/2020'],
           datasets: [
             {
               label: 'Dishwasher',
@@ -617,20 +617,18 @@
 
 /*---------------- Correctness By Meter Per Appliance ----------------*/
 
-
 /*
-WashingMachine, 237e2cd9-f7c3-4e1e-9607-8545d755ada7, 26.0, 23.0, 88.46153846153845
-WashingMachine, 4ec49423-22df-4fe2-bd80-07af918c1bac, 1.0,  1.0,  100.0
-WashingMachine, 56d6412c-b5c7-41fa-8e21-9adc83e93f7e, 46.0, 42.0, 91.30434782608695
-WashingMachine, 78f9e22e-bd12-4c0d-b724-045d6ed5e4c5, 11.0, 7.0,  63.63636363636363
-WashingMachine, c72f03e4-25aa-4044-b7b2-c58b090ba182, 42.0, 36.0, 85.71428571428571
-WashingMachine, da77074f-43ff-44b7-8efa-180bcf5d6a53, 18.0, 15.0, 83.33333333333334
-WashingMachine, f4a64c6a-33c9-4ca5-9579-a36add57a9e7, 25.0, 25.0, 100.0
-WashingMachine, fda4646b-4f9c-4e51-b779-ac916c0b687d, 3.0,  2.0,  66.66666666666666
-WashingMachine, fef3cbef-13ec-4b06-b2cd-f9c2cf0c09bb, 17.0, 10.0, 58.82352941176471
+appliance	      meter_id	                            num_days  num_correct_days	prct_correct_days
+WashingMachine, fef3cbef-13ec-4b06-b2cd-f9c2cf0c09bb, 17.0,     10.0,             58.82352941176471
+WashingMachine, 78f9e22e-bd12-4c0d-b724-045d6ed5e4c5, 11.0,     7.0,              63.63636363636363
+WashingMachine, fda4646b-4f9c-4e51-b779-ac916c0b687d, 3.0,      2.0,              66.66666666666666
+WashingMachine, da77074f-43ff-44b7-8efa-180bcf5d6a53, 18.0,     15.0,             83.33333333333334
+WashingMachine, c72f03e4-25aa-4044-b7b2-c58b090ba182, 42.0,     36.0,             85.71428571428571
+WashingMachine, 237e2cd9-f7c3-4e1e-9607-8545d755ada7, 26.0,     23.0,             88.46153846153845
+WashingMachine, 56d6412c-b5c7-41fa-8e21-9adc83e93f7e, 46.0,     42.0,             91.30434782608695
+WashingMachine, 4ec49423-22df-4fe2-bd80-07af918c1bac, 1.0,      1.0,              100.0
+WashingMachine, f4a64c6a-33c9-4ca5-9579-a36add57a9e7, 25.0,     25.0,             100.0
 */
-
-
 
       /* Washing Machine */
       function printCorrectnessByMeterWashingMachine()
@@ -638,7 +636,8 @@ WashingMachine, fef3cbef-13ec-4b06-b2cd-f9c2cf0c09bb, 17.0, 10.0, 58.82352941176
         var ctx = document.getElementById('canvas_correctness_by_meter_washing_machine');
       
         var data =  {
-          labels: ['fef3', '302d', '78f9', 'fda4', 'da77', 'c72f', '237e', '56d6', '8fe1', 'f4a6', '4ec4'],
+          //labels: ['fef3', '302d', '78f9', 'fda4', 'da77', 'c72f', '237e', '56d6', '8fe1', 'f4a6', '4ec4'],
+          labels: ['fef3', '78f9', 'fda4', 'da77', 'c72f', '237e', '56d6', '4ec4', 'f4a6'],
           datasets: [
             {
               label: 'Percentage Correct Days',
@@ -648,7 +647,8 @@ WashingMachine, fef3cbef-13ec-4b06-b2cd-f9c2cf0c09bb, 17.0, 10.0, 58.82352941176
               barPercentage: 0.8,
               color: blue,
               backgroundColor: blue.toString(),
-              data: [30, 50, 50, 66.66, 83.33, 86.84, 89.47, 92.30, 92.30, 94.44, 100]
+              //data: [58.82, 50, 63.63, 66.66, 83.33, 85.71, 88.46, 91.30, 92.30, 100, 100]
+              data: [58.82, 63.63, 66.66, 83.33, 85.71, 88.46, 91.30, 100, 100]
             },
             {
               label: 'Number of Days',
@@ -657,7 +657,8 @@ WashingMachine, fef3cbef-13ec-4b06-b2cd-f9c2cf0c09bb, 17.0, 10.0, 58.82352941176
               barPercentage: 0.8,
               color: yellow,
               backgroundColor: yellow.toString(),
-              data: [10, 8, 4, 3, 18, 38, 19, 39, 39, 18, 1]
+              data: [17, 11, 3, 18, 42, 26, 46, 1, 25]
+              //data: [10, 8, 4, 3, 18, 38, 19, 39, 39, 18, 1]
             },
             {
               label: 'Objetive',
@@ -671,7 +672,8 @@ WashingMachine, fef3cbef-13ec-4b06-b2cd-f9c2cf0c09bb, 17.0, 10.0, 58.82352941176
               colorBackground: lightRed,
               borderColor: red.toString(),
               backgroundColor: lightRed.toString(),
-              data: [80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80]
+              data: [80, 80, 80, 80, 80, 80, 80, 80, 80]
+              //data: [80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80]
             }
           ]
         }
@@ -716,7 +718,7 @@ WashingMachine, fef3cbef-13ec-4b06-b2cd-f9c2cf0c09bb, 17.0, 10.0, 58.82352941176
               {
                 ticks: {
                     beginAtZero: true,
-                    max: 40
+                    max: 50
                 },
                 display: true,
                 position: 'right',
@@ -737,13 +739,14 @@ WashingMachine, fef3cbef-13ec-4b06-b2cd-f9c2cf0c09bb, 17.0, 10.0, 58.82352941176
         });
       }
 
+
       /* Dishwasher */
       function printCorrectnessByMeterDishwasher()
       {
         var ctx = document.getElementById('canvas_correctness_by_meter_dishwasher');
       
         var data =  {
-          labels: ['bffa', '237e', 'fef3', 'f4a6'],
+          labels: ['ac33', 'bffa', '237e', 'fef3', 'f4a6'],
           datasets: [
             {
               label: 'Percentage Correct Days',
@@ -753,7 +756,7 @@ WashingMachine, fef3cbef-13ec-4b06-b2cd-f9c2cf0c09bb, 17.0, 10.0, 58.82352941176
               barPercentage: 0.8,
               color: blue,
               backgroundColor: blue.toString(),
-              data: [34.78, 57.89, 84.61, 87.5]
+              data: [25, 34.78, 57.89, 84.61, 87.5]
             },
             {
               label: 'Number of Days',
@@ -762,7 +765,7 @@ WashingMachine, fef3cbef-13ec-4b06-b2cd-f9c2cf0c09bb, 17.0, 10.0, 58.82352941176
               barPercentage: 0.8,
               color: yellow,
               backgroundColor: yellow.toString(),
-              data: [46, 19, 26, 24]
+              data: [4, 46, 19, 26, 24]
             },
             {
               label: 'Objetive',
@@ -776,7 +779,7 @@ WashingMachine, fef3cbef-13ec-4b06-b2cd-f9c2cf0c09bb, 17.0, 10.0, 58.82352941176
               colorBackground: lightRed,
               borderColor: red.toString(),
               backgroundColor: lightRed.toString(),
-              data: [80, 80, 80, 80]
+              data: [80, 80, 80, 80, 80]
             }
           ]
         }
@@ -821,7 +824,7 @@ WashingMachine, fef3cbef-13ec-4b06-b2cd-f9c2cf0c09bb, 17.0, 10.0, 58.82352941176
               {
                 ticks: {
                     beginAtZero: true,
-                    max: 40
+                    max: 50
                 },
                 display: true,
                 position: 'right',
@@ -842,12 +845,24 @@ WashingMachine, fef3cbef-13ec-4b06-b2cd-f9c2cf0c09bb, 17.0, 10.0, 58.82352941176
         });
       }
 
+      /* Meter Fridge */
+
+/*
+appliance	    meter_id	                            num_days  num_correct_days	prct_correct_days
+SingleFridge	56d6412c-b5c7-41fa-8e21-9adc83e93f7e	32	      14	              43.75
+SingleFridge	78f9e22e-bd12-4c0d-b724-045d6ed5e4c5	30	      23	              76.66666667
+SingleFridge	b3e92fd2-a486-43ac-8ab5-f99fa808fe86	44	      39	              88.63636364
+SingleFridge	44739798-89d0-45b8-8ba7-7946facfa9c9	30	      27	              90
+SingleFridge	f4a64c6a-33c9-4ca5-9579-a36add57a9e7	25	      25	              100
+SingleFridge	4ec49423-22df-4fe2-bd80-07af918c1bac	1	        1	                100
+*/
       function printCorrectnessByMeterFridge()
       {
         var ctx = document.getElementById('canvas_correctness_by_meter_fridge');
       
         var data =  {
-          labels: ['fef3', '8fe1', '56d6', '78f9', 'b3e9', '4473', '4ec4', 'f4a6'],
+          //labels: ['fef3', '8fe1', '56d6', '78f9', 'b3e9', '4473', '4ec4', 'f4a6'],
+          labels: ['56d6', '78f9', 'b3e9', '4473', 'f4a6', '4ec4'],
           datasets: [
             {
               label: 'Percentage Correct Days',
@@ -857,7 +872,8 @@ WashingMachine, fef3cbef-13ec-4b06-b2cd-f9c2cf0c09bb, 17.0, 10.0, 58.82352941176
               barPercentage: 0.8,
               color: blue,
               backgroundColor: blue.toString(),
-              data: [2.56, 47.36, 68, 78.26, 89.18, 91.30, 100, 100]
+              //data: [2.56, 47.36, 68, 78.26, 89.18, 91.30, 100, 100]
+              data: [43.75, 76.66, 88.63, 90, 100, 100]
             },
             {
               label: 'Number of Days',
@@ -866,7 +882,8 @@ WashingMachine, fef3cbef-13ec-4b06-b2cd-f9c2cf0c09bb, 17.0, 10.0, 58.82352941176
               barPercentage: 0.8,
               color: yellow,
               backgroundColor: yellow.toString(),
-              data: [39, 38, 25, 23, 37, 23, 1, 18]
+              //data: [39, 38, 25, 23, 37, 23, 1, 18]
+              data: [32, 30, 44, 30, 25, 1]
             },
             {
               label: 'Objetive',
@@ -880,7 +897,7 @@ WashingMachine, fef3cbef-13ec-4b06-b2cd-f9c2cf0c09bb, 17.0, 10.0, 58.82352941176
               colorBackground: lightRed,
               borderColor: red.toString(),
               backgroundColor: lightRed.toString(),
-              data: [80, 80, 80, 80, 80, 80, 80, 80]
+              data: [80, 80, 80, 80, 80, 80]
             }
           ]
         }
@@ -925,7 +942,7 @@ WashingMachine, fef3cbef-13ec-4b06-b2cd-f9c2cf0c09bb, 17.0, 10.0, 58.82352941176
               {
                 ticks: {
                     beginAtZero: true,
-                    max: 40
+                    max: 50
                 },
                 display: true,
                 position: 'right',
@@ -946,6 +963,17 @@ WashingMachine, fef3cbef-13ec-4b06-b2cd-f9c2cf0c09bb, 17.0, 10.0, 58.82352941176
         });
       }
 
+
+      /* Tumble Dryer */
+
+/*
+appliance	  meter_id	                            num_days  num_correct_days	prct_correct_days
+TumbleDryer	b3e92fd2-a486-43ac-8ab5-f99fa808fe86	44	      8	                18.18181818
+TumbleDryer	237e2cd9-f7c3-4e1e-9607-8545d755ada7	44	      21	              47.72727273
+TumbleDryer	fef3cbef-13ec-4b06-b2cd-f9c2cf0c09bb	46	      37	              80.43478261
+TumbleDryer	85757c17-f87f-4308-a899-1a3777819af4	47	      46	              97.87234043
+*/
+
       function printCorrectnessByMeterTumbleDryer()
       {
         var ctx = document.getElementById('canvas_correctness_by_meter_tumble_dryer');
@@ -961,7 +989,7 @@ WashingMachine, fef3cbef-13ec-4b06-b2cd-f9c2cf0c09bb, 17.0, 10.0, 58.82352941176
               barPercentage: 0.8,
               color: blue,
               backgroundColor: blue.toString(),
-              data: [18.91, 40.54, 82.05, 97.5]
+              data: [18.18, 47.72, 80.43, 97.87]
             },
             {
               label: 'Number of Days',
@@ -970,7 +998,7 @@ WashingMachine, fef3cbef-13ec-4b06-b2cd-f9c2cf0c09bb, 17.0, 10.0, 58.82352941176
               barPercentage: 0.8,
               color: yellow,
               backgroundColor: yellow.toString(),
-              data: [37, 37, 39, 40]
+              data: [44, 44, 46, 47]
             },
             {
               label: 'Objetive',
@@ -1029,7 +1057,7 @@ WashingMachine, fef3cbef-13ec-4b06-b2cd-f9c2cf0c09bb, 17.0, 10.0, 58.82352941176
               {
                 ticks: {
                     beginAtZero: true,
-                    max: 40
+                    max: 50
                 },
                 display: true,
                 position: 'right',
