@@ -2,7 +2,7 @@
 <html>
 
   <body>
-    <div style="display: block; width: 1000px; margin-left: auto; margin-right: auto;">
+    <div style="display: block; width: 1000px; margin-left: auto; margin-right: auto;" id="plots">
 
       <canvas id="canvas_correct"></canvas>
       <canvas id="canvas_others"></canvas>
@@ -48,6 +48,8 @@
       printCorrectnessByMeterDishwasher();
       printCorrectnessByMeterFridge();
       printCorrectnessByMeterTumbleDryer();
+
+      updateIframeHeight();
 
 
 /*---------------- KIPs overviews ----------------*/
@@ -1076,6 +1078,30 @@ TumbleDryer	85757c17-f87f-4308-a899-1a3777819af4	47	      46	              97.87
           data: data,
           options: options
         });
+      }
+
+
+
+/*---------------- Update iframe height ----------------*/
+
+      function updateIframeHeight() {
+
+        var plots = document.getElementById('plots');
+        var plotsStyle = getComputedStyle(plots);
+
+        var iFrameID = document.getElementById('iframe_plots');
+
+        console.log(plotsStyle.height);
+
+        if(iFrameID) {
+
+          console.log('iframe');
+
+          console.log(iFrameID.height);
+
+          iFrameID.height = "";
+          iFrameID.height = plotsStyle.height;
+        }
       }
 
 
