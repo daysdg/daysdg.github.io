@@ -11,10 +11,10 @@
       <canvas id="canvas_smart_cables_connection"></canvas>
       <canvas id="canvas_smart_cables_connection_per_appliance"></canvas>
 
+      <canvas id="canvas_correctness_by_meter_washing_machine"></canvas>
       <canvas id="canvas_correctness_by_meter_dishwasher"></canvas>
       <canvas id="canvas_correctness_by_meter_fridge"></canvas>
       <canvas id="canvas_correctness_by_meter_tumble_dryer"></canvas>
-      <canvas id="canvas_correctness_by_meter_washing_machine"></canvas>
     </div>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -44,19 +44,20 @@
       //printSmartCablesConnection();
       //printSmartCablesPerApplianceConnection();
 
+      printCorrectnessByMeterWashingMachine();
       printCorrectnessByMeterDishwasher();
       printCorrectnessByMeterFridge();
       printCorrectnessByMeterTumbleDryer();
-      printCorrectnessByMeterWashingMachine();
 
 
+/*---------------- KIPs overviews ----------------*/
 
       function printCorrectCanvas()
       {
         var ctx = document.getElementById('canvas_correct').getContext('2d');
       
         var data =  {
-          labels: ['29/04/2020', '06/05/2020', '13/05/2020'],
+          labels: ['29/04/2020', '06/05/2020', '13/05/2020', '20-05-2020'],
           datasets: [
             {
               label: 'Dishwasher',
@@ -68,7 +69,7 @@
               color: blue,
               borderColor: blue.toString(),
               backgroundColor: blue.toString(),
-              data: [30, 44, 56]
+              data: [30, 44, 56, 61]
             },
             {
               label: 'Tumble Dryer',
@@ -80,7 +81,7 @@
               color: yellow,
               borderColor: yellow.toString(),
               backgroundColor: yellow.toString(),
-              data: [45, 41, 60]
+              data: [45, 41, 60, 61]
             },
             {
               label: 'Washing Machine',
@@ -92,7 +93,7 @@
               color: green,
               borderColor: green.toString(),
               backgroundColor: green.toString(),
-              data: [86, 80, 84]
+              data: [86, 80, 84, 85]
             },
             {
               label: 'Fridge',
@@ -104,7 +105,7 @@
               color: purple,
               borderColor: purple.toString(),
               backgroundColor: purple.toString(),
-              data: [45, 60, 62]
+              data: [45, 60, 62, 80]
             },
             {
               label: 'Objetive',
@@ -116,7 +117,7 @@
               colorBackground: lightRed,
               borderColor: red.toString(),
               backgroundColor: lightRed.toString(),
-              data: [80, 80, 80]
+              data: [80, 80, 80, 80]
             }
           ]
         }
@@ -174,7 +175,7 @@
         var ctx = document.getElementById('canvas_others');
       
         var data =  {
-          labels: ['29/04/2020', '06/05/2020', '13/05/2020'],
+          labels: ['29/04/2020', '06/05/2020', '13/05/2020', '20/05/2020'],
           datasets: [
             {
               label: 'Others',
@@ -186,7 +187,7 @@
               color: blue,
               borderColor: blue.toString(),
               backgroundColor: blue.toString(),
-              data: [77, 64, 85]
+              data: [77, 64, 85, 86]
             },
             {
               label: 'Objetive',
@@ -198,7 +199,7 @@
               colorBackground: lightRed,
               borderColor: red.toString(),
               backgroundColor: lightRed.toString(),
-              data: [80, 80, 80]
+              data: [80, 80, 80, 80]
             }
           ]
         }
@@ -251,7 +252,7 @@
         var ctx = document.getElementById('canvas_detected');
       
         var data =  {
-          labels: ['29/04/2020', '06/05/2020', '13/05/2020'],
+          labels: ['29/04/2020', '06/05/2020', '13/05/2020', '20/05/2020'],
           datasets: [
             {
               label: 'Dishwasher',
@@ -263,7 +264,7 @@
               color: blue,
               borderColor: blue.toString(),
               backgroundColor: blue.toString(),
-              data: [45, 64, 69]
+              data: [45, 64, 69, 60]
             },
             {
               label: 'Tumble Dryer',
@@ -275,7 +276,7 @@
               color: yellow,
               borderColor: yellow.toString(),
               backgroundColor: yellow.toString(),
-              data: [49, 44, 45]
+              data: [49, 44, 45, 45]
             },
             {
               label: 'Washing Machine',
@@ -287,7 +288,7 @@
               color: green,
               borderColor: green.toString(),
               backgroundColor: green.toString(),
-              data: [80, 78, 81]
+              data: [80, 78, 81, 82]
             },
             {
               label: 'Objetive',
@@ -299,7 +300,7 @@
               colorBackground: lightRed,
               borderColor: red.toString(),
               backgroundColor: lightRed.toString(),
-              data: [80, 80, 80]
+              data: [80, 80, 80, 80]
             }
           ]
         }
@@ -352,7 +353,7 @@
         var ctx = document.getElementById('canvas_falsepositive');
       
         var data =  {
-          labels: ['29/04/2020', '06/05/2020', '13/05/2020'],
+          labels: ['29/04/2020', '06/05/2020', '13/05/2020', '20/05/2020'],
           datasets: [
             {
               label: 'Dishwasher',
@@ -364,7 +365,7 @@
               color: blue,
               borderColor: blue.toString(),
               backgroundColor: blue.toString(),
-              data: [2, 21, 16]
+              data: [2, 21, 16, 7]
             },
             {
               label: 'Tumble Dryer',
@@ -376,7 +377,7 @@
               color: yellow,
               borderColor: yellow.toString(),
               backgroundColor: yellow.toString(),
-              data: [4, 4, 5]
+              data: [4, 4, 5, 6]
             },
             {
               label: 'Washing Machine',
@@ -388,7 +389,7 @@
               color: green,
               borderColor: green.toString(),
               backgroundColor: green.toString(),
-              data: [13, 12, 16]
+              data: [13, 12, 16, 17]
             },
             {
               label: 'Objetive',
@@ -401,7 +402,7 @@
               colorBackground: lightRed,
               borderColor: red.toString(),
               backgroundColor: lightRed.toString(),
-              data: [10, 10, 10]
+              data: [10, 10, 10, 10]
             }
           ]
         }
@@ -614,10 +615,132 @@
       }
 
 
+/*---------------- Correctness By Meter Per Appliance ----------------*/
 
+
+/*
+WashingMachine, 237e2cd9-f7c3-4e1e-9607-8545d755ada7, 26.0, 23.0, 88.46153846153845
+WashingMachine, 4ec49423-22df-4fe2-bd80-07af918c1bac, 1.0,  1.0,  100.0
+WashingMachine, 56d6412c-b5c7-41fa-8e21-9adc83e93f7e, 46.0, 42.0, 91.30434782608695
+WashingMachine, 78f9e22e-bd12-4c0d-b724-045d6ed5e4c5, 11.0, 7.0,  63.63636363636363
+WashingMachine, c72f03e4-25aa-4044-b7b2-c58b090ba182, 42.0, 36.0, 85.71428571428571
+WashingMachine, da77074f-43ff-44b7-8efa-180bcf5d6a53, 18.0, 15.0, 83.33333333333334
+WashingMachine, f4a64c6a-33c9-4ca5-9579-a36add57a9e7, 25.0, 25.0, 100.0
+WashingMachine, fda4646b-4f9c-4e51-b779-ac916c0b687d, 3.0,  2.0,  66.66666666666666
+WashingMachine, fef3cbef-13ec-4b06-b2cd-f9c2cf0c09bb, 17.0, 10.0, 58.82352941176471
+*/
+
+
+
+      /* Washing Machine */
+      function printCorrectnessByMeterWashingMachine()
+      {
+        var ctx = document.getElementById('canvas_correctness_by_meter_washing_machine');
+      
+        var data =  {
+          labels: ['fef3', '302d', '78f9', 'fda4', 'da77', 'c72f', '237e', '56d6', '8fe1', 'f4a6', '4ec4'],
+          datasets: [
+            {
+              label: 'Percentage Correct Days',
+              selected: false,
+              barThickness: 'flex',
+              yAxisID: 'y-axis-prctg-correct-days-objective',
+              barPercentage: 0.8,
+              color: blue,
+              backgroundColor: blue.toString(),
+              data: [30, 50, 50, 66.66, 83.33, 86.84, 89.47, 92.30, 92.30, 94.44, 100]
+            },
+            {
+              label: 'Number of Days',
+              selected: false,
+              yAxisID: 'y-axis-number-days',
+              barPercentage: 0.8,
+              color: yellow,
+              backgroundColor: yellow.toString(),
+              data: [10, 8, 4, 3, 18, 38, 19, 39, 39, 18, 1]
+            },
+            {
+              label: 'Objetive',
+              yAxisID: 'y-axis-prctg-correct-days-objective',
+              type: 'line',
+              borderWidth: 2,
+              lineTension: 0,
+              pointHoverRadius: 6,
+              selected: false,
+              color: red,
+              colorBackground: lightRed,
+              borderColor: red.toString(),
+              backgroundColor: lightRed.toString(),
+              data: [80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80]
+            }
+          ]
+        }
+
+        var options = {
+          title: {
+              display: true,
+              text: 'Washing Machine',
+              fontSize: 30,
+              fontStyle: 'bold',
+              fontColor: '#000',
+              lineHeight: 3
+          },
+          legend: {
+            position: 'right',
+            align: 'start',
+            labels: {
+              //fontStyle: 'bolder'
+              fontWeight: 500
+            },
+            onClick: function (event, legendItem) {
+              onClickLegendItem(event, legendItem, myLineChart)
+            },
+            onHover: function (event, legendItem) {
+              onHoverLegendItem(event, legendItem, myLineChart)
+            },
+            onLeave: function (event, legendItem) {
+              onLeaveLegendItem(event, legendItem, myLineChart)
+            }
+          },
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                    beginAtZero: true,
+                    max: 100
+                },
+                display: true,
+                position: 'left',
+                id: 'y-axis-prctg-correct-days-objective'
+              },
+              {
+                ticks: {
+                    beginAtZero: true,
+                    max: 40
+                },
+                display: true,
+                position: 'right',
+                id: 'y-axis-number-days'
+              }
+            ]
+          },
+          hover: {
+						mode: 'point',
+						intersect: false,
+					}
+        };
+        
+        var myLineChart = new Chart(ctx, {
+          type: 'bar',
+          data: data,
+          options: options
+        });
+      }
+
+      /* Dishwasher */
       function printCorrectnessByMeterDishwasher()
       {
-        var ctx = document.getElementById('canvas_smart_cables_connection_per_appliance');
+        var ctx = document.getElementById('canvas_correctness_by_meter_dishwasher');
       
         var data =  {
           labels: ['bffa', '237e', 'fef3', 'f4a6'],
@@ -630,7 +753,7 @@
               barPercentage: 0.8,
               color: blue,
               backgroundColor: blue.toString(),
-              data: [35.89, 52.63, 73.68, 88.23]
+              data: [34.78, 57.89, 84.61, 87.5]
             },
             {
               label: 'Number of Days',
@@ -639,7 +762,7 @@
               barPercentage: 0.8,
               color: yellow,
               backgroundColor: yellow.toString(),
-              data: [39, 19, 19, 17]
+              data: [46, 19, 26, 24]
             },
             {
               label: 'Objetive',
@@ -927,121 +1050,8 @@
         });
       }
 
-      function printCorrectnessByMeterWashingMachine()
-      {
-        var ctx = document.getElementById('canvas_correctness_by_meter_washing_machine');
-      
-        var data =  {
-          labels: ['fef3', '302d', '78f9', 'fda4', 'da77', 'c72f', '237e', '56d6', '8fe1', 'f4a6', '4ec4'],
-          datasets: [
-            {
-              label: 'Percentage Correct Days',
-              selected: false,
-              barThickness: 'flex',
-              yAxisID: 'y-axis-prctg-correct-days-objective',
-              barPercentage: 0.8,
-              color: blue,
-              backgroundColor: blue.toString(),
-              data: [30, 50, 50, 66.66, 83.33, 86.84, 89.47, 92.30, 92.30, 94.44, 100]
-            },
-            {
-              label: 'Number of Days',
-              selected: false,
-              yAxisID: 'y-axis-number-days',
-              barPercentage: 0.8,
-              color: yellow,
-              backgroundColor: yellow.toString(),
-              data: [10, 8, 4, 3, 18, 38, 19, 39, 39, 18, 1]
-            },
-            {
-              label: 'Objetive',
-              yAxisID: 'y-axis-prctg-correct-days-objective',
-              type: 'line',
-              borderWidth: 2,
-              lineTension: 0,
-              pointHoverRadius: 6,
-              selected: false,
-              color: red,
-              colorBackground: lightRed,
-              borderColor: red.toString(),
-              backgroundColor: lightRed.toString(),
-              data: [80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80]
-            }
-          ]
-        }
 
-        var options = {
-          title: {
-              display: true,
-              text: 'Washing Machine',
-              fontSize: 30,
-              fontStyle: 'bold',
-              fontColor: '#000',
-              lineHeight: 3
-          },
-          legend: {
-            position: 'right',
-            align: 'start',
-            labels: {
-              //fontStyle: 'bolder'
-              fontWeight: 500
-            },
-            onClick: function (event, legendItem) {
-              onClickLegendItem(event, legendItem, myLineChart)
-            },
-            onHover: function (event, legendItem) {
-              onHoverLegendItem(event, legendItem, myLineChart)
-            },
-            onLeave: function (event, legendItem) {
-              onLeaveLegendItem(event, legendItem, myLineChart)
-            }
-          },
-          scales: {
-            yAxes: [
-              {
-                ticks: {
-                    beginAtZero: true,
-                    max: 100
-                },
-                display: true,
-                position: 'left',
-                id: 'y-axis-prctg-correct-days-objective'
-              },
-              {
-                ticks: {
-                    beginAtZero: true,
-                    max: 40
-                },
-                display: true,
-                position: 'right',
-                id: 'y-axis-number-days'
-              }
-            ]
-          },
-          hover: {
-						mode: 'point',
-						intersect: false,
-					}
-        };
-        
-        var myLineChart = new Chart(ctx, {
-          type: 'bar',
-          data: data,
-          options: options
-        });
-      }
-
-
-
-
-
-
-
-
-
-
-
-
+/*---------------- Improvements on Charts behaviours ----------------*/
 
       function onHoverLegendItem(event, legendItem, chart)
       {
