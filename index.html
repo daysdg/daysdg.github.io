@@ -1091,13 +1091,13 @@ TumbleDryer	85757c17-f87f-4308-a899-1a3777819af4	47	      46	              97.87
 
         var iFrameID = document.getElementById('iframe_plots');
 
-        console.log(plotsStyle.height);
+        console.log('Plot Height: ' + plotsStyle.height);
 
         if(iFrameID) {
 
           console.log('iframe');
 
-          console.log(iFrameID.height);
+          console.log('IFrame Height: ' + iFrameID.height);
 
           iFrameID.height = "";
           iFrameID.height = plotsStyle.height;
