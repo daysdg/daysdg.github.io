@@ -617,19 +617,6 @@
 
 /*---------------- Correctness By Meter Per Appliance ----------------*/
 
-/*
-appliance	      meter_id	                            num_days  num_correct_days	prct_correct_days
-WashingMachine, fef3cbef-13ec-4b06-b2cd-f9c2cf0c09bb, 17.0,     10.0,             58.82352941176471
-WashingMachine, 78f9e22e-bd12-4c0d-b724-045d6ed5e4c5, 11.0,     7.0,              63.63636363636363
-WashingMachine, fda4646b-4f9c-4e51-b779-ac916c0b687d, 3.0,      2.0,              66.66666666666666
-WashingMachine, da77074f-43ff-44b7-8efa-180bcf5d6a53, 18.0,     15.0,             83.33333333333334
-WashingMachine, c72f03e4-25aa-4044-b7b2-c58b090ba182, 42.0,     36.0,             85.71428571428571
-WashingMachine, 237e2cd9-f7c3-4e1e-9607-8545d755ada7, 26.0,     23.0,             88.46153846153845
-WashingMachine, 56d6412c-b5c7-41fa-8e21-9adc83e93f7e, 46.0,     42.0,             91.30434782608695
-WashingMachine, 4ec49423-22df-4fe2-bd80-07af918c1bac, 1.0,      1.0,              100.0
-WashingMachine, f4a64c6a-33c9-4ca5-9579-a36add57a9e7, 25.0,     25.0,             100.0
-*/
-
       /* Washing Machine */
       function printCorrectnessByMeterWashingMachine()
       {
@@ -846,16 +833,6 @@ WashingMachine, f4a64c6a-33c9-4ca5-9579-a36add57a9e7, 25.0,     25.0,           
       }
 
       /* Meter Fridge */
-
-/*
-appliance	    meter_id	                            num_days  num_correct_days	prct_correct_days
-SingleFridge	56d6412c-b5c7-41fa-8e21-9adc83e93f7e	32	      14	              43.75
-SingleFridge	78f9e22e-bd12-4c0d-b724-045d6ed5e4c5	30	      23	              76.66666667
-SingleFridge	b3e92fd2-a486-43ac-8ab5-f99fa808fe86	44	      39	              88.63636364
-SingleFridge	44739798-89d0-45b8-8ba7-7946facfa9c9	30	      27	              90
-SingleFridge	f4a64c6a-33c9-4ca5-9579-a36add57a9e7	25	      25	              100
-SingleFridge	4ec49423-22df-4fe2-bd80-07af918c1bac	1	        1	                100
-*/
       function printCorrectnessByMeterFridge()
       {
         var ctx = document.getElementById('canvas_correctness_by_meter_fridge');
@@ -965,15 +942,6 @@ SingleFridge	4ec49423-22df-4fe2-bd80-07af918c1bac	1	        1	                10
 
 
       /* Tumble Dryer */
-
-/*
-appliance	  meter_id	                            num_days  num_correct_days	prct_correct_days
-TumbleDryer	b3e92fd2-a486-43ac-8ab5-f99fa808fe86	44	      8	                18.18181818
-TumbleDryer	237e2cd9-f7c3-4e1e-9607-8545d755ada7	44	      21	              47.72727273
-TumbleDryer	fef3cbef-13ec-4b06-b2cd-f9c2cf0c09bb	46	      37	              80.43478261
-TumbleDryer	85757c17-f87f-4308-a899-1a3777819af4	47	      46	              97.87234043
-*/
-
       function printCorrectnessByMeterTumbleDryer()
       {
         var ctx = document.getElementById('canvas_correctness_by_meter_tumble_dryer');
@@ -1079,7 +1047,6 @@ TumbleDryer	85757c17-f87f-4308-a899-1a3777819af4	47	      46	              97.87
       }
 
 
-
 /*---------------- Update iframe height ----------------*/
 
       function updateIframeHeight() {
@@ -1089,7 +1056,8 @@ TumbleDryer	85757c17-f87f-4308-a899-1a3777819af4	47	      46	              97.87
 
         console.log('Plot Height 1: ' + plotsStyle.height);
 
-        var iFrameID = document.getElementById('iframe_plots');
+        //window.parent.document.getElementById
+        var iFrameID = window.parent.document.getElementById('iframe_plots');
 
         if(iFrameID) {
 
