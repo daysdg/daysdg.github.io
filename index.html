@@ -59,8 +59,6 @@
 
       function printCorrectCanvas()
       {
-        var ctx = document.getElementById('canvas_correct').getContext('2d');
-
         var labels = ['29/04/2020', '06/05/2020', '13/05/2020', '20/05/2020'];
 
         // Label[0],            Fill[1],    Color/BorderColor[2],   BackgroundColor[3],   Data[4]
@@ -77,58 +75,12 @@
           datasets: CreateDataSetArrayForLineCharts(dataAppliances)
         }
 
-        var options = {
-          title: {
-              display: true,
-              text: 'Correct Energy',
-              fontSize: 30,
-              fontStyle: 'bold',
-              fontColor: '#000',
-              lineHeight: 3
-          },
-          legend: {
-            position: 'right',
-            align: 'start',
-            labels: {
-              fontStyle: 'normal',
-              strokeStyle: 'rgb(0, 255, 0)'
-            },
-            onClick: function (event, legendItem) {
-              onClickLegendItem(event, legendItem, myLineChart)
-            },
-            onHover: function (event, legendItem) {
-              onHoverLegendItem(event, legendItem, myLineChart)
-            },
-            onLeave: function (event, legendItem) {
-              onLeaveLegendItem(event, legendItem, myLineChart)
-            }
-          },
-          scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true,
-                    max: 100
-                }
-            }]
-          },
-          hover: {
-						mode: 'point',
-						intersect: false,
-					}
-        };
-        
-        var myLineChart = new Chart(ctx, {
-          type: 'line',
-          data: data,
-          options: options
-        });
+        CreateLineChart('canvas_correct', 'Correct Energy', data);
 
       }
 
       function printOthersCanvas()
       {
-        var ctx = document.getElementById('canvas_others');
-
         var labels = ['29/04/2020', '06/05/2020', '13/05/2020', '20/05/2020'];
 
         // Label[0],            Fill[1],    Color/BorderColor[2],   BackgroundColor[3],   Data[4]
@@ -142,53 +94,11 @@
           datasets: CreateDataSetArrayForLineCharts(dataAppliances)
         }
 
-        var options = {
-          title: {
-              display: true,
-              text: 'Percentage of days with Others <20%',
-              fontSize: 30,
-              fontStyle: 'bold',
-              fontColor: '#000',
-              lineHeight: 3
-          },
-          legend: {
-            position: 'right',
-            align: 'start',
-            onClick: function (event, legendItem) {
-              onClickLegendItem(event, legendItem, myLineChart)
-            },
-            onHover: function (event, legendItem) {
-              onHoverLegendItem(event, legendItem, myLineChart)
-            },
-            onLeave: function (event, legendItem) {
-              onLeaveLegendItem(event, legendItem, myLineChart)
-            }
-          },
-          scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true,
-                    max: 100
-                }
-            }]
-          },
-          hover: {
-						mode: 'point',
-						intersect: false,
-					}
-        };
-        
-        var myLineChart = new Chart(ctx, {
-          type: 'line',
-          data: data,
-          options: options
-        });
+        CreateLineChart('canvas_others', 'Percentage of days with Others <20%', data);
       }
 
       function printDetectedCanvas()
       {
-        var ctx = document.getElementById('canvas_detected');
-
         var labels = ['29/04/2020', '06/05/2020', '13/05/2020', '20/05/2020'];
 
         // Label[0],            Fill[1],    Color/BorderColor[2],   BackgroundColor[3],   Data[4]
@@ -204,53 +114,11 @@
           datasets: CreateDataSetArrayForLineCharts(dataAppliances)
         }
 
-        var options = {
-          title: {
-              display: true,
-              text: 'Detected Cycles',
-              fontSize: 30,
-              fontStyle: 'bold',
-              fontColor: '#000',
-              lineHeight: 3
-          },
-          legend: {
-            position: 'right',
-            align: 'start',
-            onClick: function (event, legendItem) {
-              onClickLegendItem(event, legendItem, myLineChart)
-            },
-            onHover: function (event, legendItem) {
-              onHoverLegendItem(event, legendItem, myLineChart)
-            },
-            onLeave: function (event, legendItem) {
-              onLeaveLegendItem(event, legendItem, myLineChart)
-            }
-          },
-          scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true,
-                    max: 100
-                }
-            }]
-          },
-          hover: {
-						mode: 'point',
-						intersect: false,
-					}
-        };
-        
-        var myLineChart = new Chart(ctx, {
-          type: 'line',
-          data: data,
-          options: options
-        });
+        CreateLineChart('canvas_detected', 'Detected Cycles', data);
       }
 
       function printFalsePositiveCanvas()
       {
-        var ctx = document.getElementById('canvas_falsepositive');
-
         var labels = ['29/04/2020', '06/05/2020', '13/05/2020', '20/05/2020'];
 
         // Label[0],            Fill[1],    Color/BorderColor[2],   BackgroundColor[3],   Data[4]
@@ -266,47 +134,7 @@
           datasets: CreateDataSetArrayForLineCharts(dataAppliances)
         }
 
-        var options = {
-          title: {
-              display: true,
-              text: 'False Positive Cycles',
-              fontSize: 30,
-              fontStyle: 'bold',
-              fontColor: '#000',
-              lineHeight: 3
-          },
-          legend: {
-            position: 'right',
-            align: 'start',
-            onClick: function (event, legendItem) {
-              onClickLegendItem(event, legendItem, myLineChart)
-            },
-            onHover: function (event, legendItem) {
-              onHoverLegendItem(event, legendItem, myLineChart)
-            },
-            onLeave: function (event, legendItem) {
-              onLeaveLegendItem(event, legendItem, myLineChart)
-            }
-          },
-          scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true,
-                    max: 100
-                }
-            }]
-          },
-          hover: {
-						mode: 'point',
-						intersect: false,
-					}
-        };
-        
-        var myLineChart = new Chart(ctx, {
-          type: 'line',
-          data: data,
-          options: options
-        });
+        CreateLineChart('canvas_falsepositive', 'False Positive Cycles', data);
       }
 
       function printSmartCablesConnection()
@@ -482,8 +310,6 @@
       /* Washing Machine */
       function printCorrectnessByMeterWashingMachine()
       {
-        var ctx = document.getElementById('canvas_correctness_by_meter_washing_machine');
-
         var labels = ['fef3', '78f9', 'fda4', 'da77', 'c72f', '237e', '56d6', '4ec4', 'f4a6'];
 
         // Label[0],                      Type[1],      yAxisID[2],                               Color/BorderColor[3],   BackgroundColor[4],   Data[5]
@@ -498,72 +324,12 @@
           datasets: CreateDataSetArrayForBarCharts(data)
         }
 
-        var options = {
-          title: {
-              display: true,
-              text: 'Washing Machine',
-              fontSize: 30,
-              fontStyle: 'bold',
-              fontColor: '#000',
-              lineHeight: 3
-          },
-          legend: {
-            position: 'right',
-            align: 'start',
-            labels: {
-              //fontStyle: 'bolder'
-              fontWeight: 500
-            },
-            onClick: function (event, legendItem) {
-              onClickLegendItem(event, legendItem, myLineChart)
-            },
-            onHover: function (event, legendItem) {
-              onHoverLegendItem(event, legendItem, myLineChart)
-            },
-            onLeave: function (event, legendItem) {
-              onLeaveLegendItem(event, legendItem, myLineChart)
-            }
-          },
-          scales: {
-            yAxes: [
-              {
-                ticks: {
-                    beginAtZero: true,
-                    max: 100
-                },
-                display: true,
-                position: 'left',
-                id: 'y-axis-prctg-correct-days-objective'
-              },
-              {
-                ticks: {
-                    beginAtZero: true,
-                    max: 50
-                },
-                display: true,
-                position: 'right',
-                id: 'y-axis-number-days'
-              }
-            ]
-          },
-          hover: {
-						mode: 'point',
-						intersect: false,
-					}
-        };
-        
-        var myLineChart = new Chart(ctx, {
-          type: 'bar',
-          data: data,
-          options: options
-        });
+        CreateBarChart('canvas_correctness_by_meter_washing_machine', 'Washing Machine', data );
       }
 
       /* Dishwasher */
       function printCorrectnessByMeterDishwasher()
       {
-        var ctx = document.getElementById('canvas_correctness_by_meter_dishwasher');
-
         var labels = ['ac33', 'bffa', '237e', 'fef3', 'f4a6'];
 
         // Label[0],                      Type[1],      yAxisID[2],                               Color/BorderColor[3],   BackgroundColor[4],   Data[5]
@@ -578,72 +344,12 @@
           datasets: CreateDataSetArrayForBarCharts(data)
         }
 
-        var options = {
-          title: {
-              display: true,
-              text: 'Dishwasher',
-              fontSize: 30,
-              fontStyle: 'bold',
-              fontColor: '#000',
-              lineHeight: 3
-          },
-          legend: {
-            position: 'right',
-            align: 'start',
-            labels: {
-              //fontStyle: 'bolder'
-              fontWeight: 500
-            },
-            onClick: function (event, legendItem) {
-              onClickLegendItem(event, legendItem, myLineChart)
-            },
-            onHover: function (event, legendItem) {
-              onHoverLegendItem(event, legendItem, myLineChart)
-            },
-            onLeave: function (event, legendItem) {
-              onLeaveLegendItem(event, legendItem, myLineChart)
-            }
-          },
-          scales: {
-            yAxes: [
-              {
-                ticks: {
-                    beginAtZero: true,
-                    max: 100
-                },
-                display: true,
-                position: 'left',
-                id: 'y-axis-prctg-correct-days-objective'
-              },
-              {
-                ticks: {
-                    beginAtZero: true,
-                    max: 50
-                },
-                display: true,
-                position: 'right',
-                id: 'y-axis-number-days'
-              }
-            ]
-          },
-          hover: {
-						mode: 'point',
-						intersect: false,
-					}
-        };
-        
-        var myLineChart = new Chart(ctx, {
-          type: 'bar',
-          data: data,
-          options: options
-        });
+        CreateBarChart('canvas_correctness_by_meter_dishwasher', 'Dishwasher', data );
       }
 
       /* Meter Fridge */
       function printCorrectnessByMeterFridge()
       {
-        var ctx = document.getElementById('canvas_correctness_by_meter_fridge');
-
         var labels = ['56d6', '78f9', 'b3e9', '4473', 'f4a6', '4ec4'];
 
         // Label[0],                      Type[1],      yAxisID[2],                               Color/BorderColor[3],   BackgroundColor[4],   Data[5]
@@ -658,72 +364,12 @@
           datasets: CreateDataSetArrayForBarCharts(data)
         }
 
-        var options = {
-          title: {
-              display: true,
-              text: 'Fridge',
-              fontSize: 30,
-              fontStyle: 'bold',
-              fontColor: '#000',
-              lineHeight: 3
-          },
-          legend: {
-            position: 'right',
-            align: 'start',
-            labels: {
-              //fontStyle: 'bolder'
-              fontWeight: 500
-            },
-            onClick: function (event, legendItem) {
-              onClickLegendItem(event, legendItem, myLineChart)
-            },
-            onHover: function (event, legendItem) {
-              onHoverLegendItem(event, legendItem, myLineChart)
-            },
-            onLeave: function (event, legendItem) {
-              onLeaveLegendItem(event, legendItem, myLineChart)
-            }
-          },
-          scales: {
-            yAxes: [
-              {
-                ticks: {
-                    beginAtZero: true,
-                    max: 100
-                },
-                display: true,
-                position: 'left',
-                id: 'y-axis-prctg-correct-days-objective'
-              },
-              {
-                ticks: {
-                    beginAtZero: true,
-                    max: 50
-                },
-                display: true,
-                position: 'right',
-                id: 'y-axis-number-days'
-              }
-            ]
-          },
-          hover: {
-						mode: 'point',
-						intersect: false,
-					}
-        };
-        
-        var myLineChart = new Chart(ctx, {
-          type: 'bar',
-          data: data,
-          options: options
-        });
+        CreateBarChart('canvas_correctness_by_meter_fridge', 'Fridge', data);
       }
 
       /* Tumble Dryer */
       function printCorrectnessByMeterTumbleDryer()
       {
-        var ctx = document.getElementById('canvas_correctness_by_meter_tumble_dryer');
-
         var labels = ['b3e9', '237e', 'fef3', '8575'];
 
         // Label[0],                      Type[1],      yAxisID[2],                               Color/BorderColor[3],   BackgroundColor[4],   Data[5]
@@ -738,10 +384,74 @@
           datasets: CreateDataSetArrayForBarCharts(data)
         }
 
+        CreateBarChart('canvas_correctness_by_meter_tumble_dryer', 'Tumble Dryer', data);
+      }
+
+
+
+
+/*---------------- Create Charts ----------------*/
+
+      function CreateLineChart(elementId, title, data)
+      {
+        var ctx = document.getElementById(elementId).getContext('2d');
+
         var options = {
           title: {
               display: true,
-              text: 'Tumble Dryer',
+              text: title,
+              fontSize: 30,
+              fontStyle: 'bold',
+              fontColor: '#000',
+              lineHeight: 3
+          },
+          legend: {
+            position: 'right',
+            align: 'start',
+            labels: {
+              fontStyle: 'normal',
+              strokeStyle: 'rgb(0, 255, 0)'
+            },
+            onClick: function (event, legendItem) {
+              onClickLegendItem(event, legendItem, myLineChart)
+            },
+            onHover: function (event, legendItem) {
+              onHoverLegendItem(event, legendItem, myLineChart)
+            },
+            onLeave: function (event, legendItem) {
+              onLeaveLegendItem(event, legendItem, myLineChart)
+            }
+          },
+          scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }]
+          },
+          hover: {
+						mode: 'point',
+						intersect: false,
+					}
+        };
+        
+        var myLineChart = new Chart(ctx, {
+          type: 'line',
+          data: data,
+          options: options
+        });
+
+      }
+
+      function CreateBarChart(elementId, title, data)
+      {
+        var ctx = document.getElementById(elementId);
+
+        var options = {
+          title: {
+              display: true,
+              text: title,
               fontSize: 30,
               fontStyle: 'bold',
               fontColor: '#000',
@@ -792,13 +502,12 @@
 					}
         };
         
-        var myLineChart = new Chart(ctx, {
+        var myBarChart = new Chart(ctx, {
           type: 'bar',
           data: data,
           options: options
         });
       }
-
 
 
 
@@ -856,6 +565,8 @@
 
         return dataSets;
       }
+
+
 
 
 
