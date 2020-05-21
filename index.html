@@ -63,10 +63,10 @@
 
         // Label[0],            Fill[1],    Color/BorderColor[2],   BackgroundColor[3],   Data[4]
         var dataAppliances = [
-          ['Dishwasher',        false,      blue,                   blue,                 [30, 44, 56, 61] ],
-          ['Tumble Dryer',      false,      yellow,                 yellow,               [45, 41, 60, 61] ],
-          ['Washing Machine',   false,      green,                  green,                [86, 80, 84, 85] ],
-          ['Fridge',            false,      purple,                 purple,               [45, 60, 62, 80] ],
+          ['Dishwasher',        false,      blue,                   null,                 [30, 44, 56, 61] ],
+          ['Tumble Dryer',      false,      yellow,                 null,                 [45, 41, 60, 61] ],
+          ['Washing Machine',   false,      green,                  null,                 [86, 80, 84, 85] ],
+          ['Fridge',            false,      purple,                 null,                 [45, 60, 62, 80] ],
           ['Objetive',          true,       red,                    lightRed,             [80, 80, 80, 80] ],
         ];
 
@@ -312,11 +312,11 @@
       {
         var labels = ['fef3', '78f9', 'fda4', 'da77', 'c72f', '237e', '56d6', '4ec4', 'f4a6'];
 
-        // Label[0],                      Type[1],      yAxisID[2],                               Color/BorderColor[3],   BackgroundColor[4],   Data[5]
+        // Label[0],                      Type[1],      yAxisID[2],                               BorderColor[3],   BackgroundColor[4],   Data[5]
         var data = [
-          ['Percentage Correct Days',     'bar',        'y-axis-prctg-correct-days-objective',    blue,                   blue,                 [58.82, 63.63, 66.66, 83.33, 85.71, 88.46, 91.30, 100, 100] ],
-          ['Number of Days',              'bar',        'y-axis-number-days',                     yellow,                 yellow,               [17, 11, 3, 18, 42, 26, 46, 1, 25] ],
-          ['Objetive',                    'line',       'y-axis-prctg-correct-days-objective',    red,                    lightRed,             [80, 80, 80, 80, 80, 80, 80, 80, 80] ],
+          ['Percentage Correct Days',     'bar',        'y-axis-prctg-correct-days-objective',    blue,             blue,                 [58.82, 63.63, 66.66, 83.33, 85.71, 88.46, 91.30, 100, 100] ],
+          ['Number of Days',              'bar',        'y-axis-number-days',                     yellow,           yellow,               [17, 11, 3, 18, 42, 26, 46, 1, 25] ],
+          ['Objetive',                    'line',       'y-axis-prctg-correct-days-objective',    red,              lightRed,             [80, 80, 80, 80, 80, 80, 80, 80, 80] ],
         ];
 
         var data =  {
@@ -465,13 +465,13 @@
               fontWeight: 500
             },
             onClick: function (event, legendItem) {
-              onClickLegendItem(event, legendItem, myLineChart)
+              onClickLegendItem(event, legendItem, myBarChart)
             },
             onHover: function (event, legendItem) {
-              onHoverLegendItem(event, legendItem, myLineChart)
+              onHoverLegendItem(event, legendItem, myBarChart)
             },
             onLeave: function (event, legendItem) {
-              onLeaveLegendItem(event, legendItem, myLineChart)
+              onLeaveLegendItem(event, legendItem, myBarChart)
             }
           },
           scales: {
@@ -529,7 +529,8 @@
             fill: options[i][1],
             color: options[i][2],
             borderColor: options[i][2].toString(),
-            backgroundColor: options[i][3].toString(),
+            colorBackground: options[i][3],
+            backgroundColor: options[i][3] ? options[i][3].toString() : null,
             data: options[i][4]
           };
 
@@ -553,10 +554,13 @@
             label: options[i][0],
             type: options[i][1],
             yAxisID: options[i][2],
+
             color: options[i][3],
-            borderColor: options[i][3].toString(),
-            colorBackground: options[i][4],
+            borderColor: options[i][1] == 'line' ? options[i][3].toString() : null,
+
+            colorBackground: options[i][1] == 'line' ? options[i][4] : null,
             backgroundColor: options[i][4].toString(),
+
             data: options[i][5]
           };
 
