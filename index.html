@@ -52,76 +52,29 @@
       updateIframeHeight();
 
 
+
+
+
 /*---------------- KIPs overviews ----------------*/
 
       function printCorrectCanvas()
       {
         var ctx = document.getElementById('canvas_correct').getContext('2d');
-      
+
+        var labels = ['29/04/2020', '06/05/2020', '13/05/2020', '20/05/2020'];
+
+        // Label[0],            Fill[1],    Color/BorderColor[2],   BackgroundColor[3],   Data[4]
+        var dataAppliances = [
+          ['Dishwasher',        false,      blue,                   blue,                 [30, 44, 56, 61] ],
+          ['Tumble Dryer',      false,      yellow,                 yellow,               [45, 41, 60, 61] ],
+          ['Washing Machine',   false,      green,                  green,                [86, 80, 84, 85] ],
+          ['Fridge',            false,      purple,                 purple,               [45, 60, 62, 80] ],
+          ['Objetive',          true,       red,                    lightRed,             [80, 80, 80, 80] ],
+        ];
+
         var data =  {
-          labels: ['29/04/2020', '06/05/2020', '13/05/2020', '20/05/2020'],
-          datasets: [
-            {
-              label: 'Dishwasher',
-              fill: false,
-              pointHoverRadius: 6,
-              borderWidth: 2,
-              lineTension: 0,
-              selected: false,
-              color: blue,
-              borderColor: blue.toString(),
-              backgroundColor: blue.toString(),
-              data: [30, 44, 56, 61]
-            },
-            {
-              label: 'Tumble Dryer',
-              fill: false,
-              pointHoverRadius: 6,
-              borderWidth: 2,
-              lineTension: 0,
-              selected: false,
-              color: yellow,
-              borderColor: yellow.toString(),
-              backgroundColor: yellow.toString(),
-              data: [45, 41, 60, 61]
-            },
-            {
-              label: 'Washing Machine',
-              fill: false,
-              pointHoverRadius: 6,
-              borderWidth: 2,
-              lineTension: 0,
-              selected: false,
-              color: green,
-              borderColor: green.toString(),
-              backgroundColor: green.toString(),
-              data: [86, 80, 84, 85]
-            },
-            {
-              label: 'Fridge',
-              fill: false,
-              pointHoverRadius: 6,
-              borderWidth: 2,
-              lineTension: 0,
-              selected: false,
-              color: purple,
-              borderColor: purple.toString(),
-              backgroundColor: purple.toString(),
-              data: [45, 60, 62, 80]
-            },
-            {
-              label: 'Objetive',
-              borderWidth: 2,
-              lineTension: 0,
-              pointHoverRadius: 6,
-              selected: false,
-              color: red,
-              colorBackground: lightRed,
-              borderColor: red.toString(),
-              backgroundColor: lightRed.toString(),
-              data: [80, 80, 80, 80]
-            }
-          ]
+          labels: labels,
+          datasets: CreateDataSetArrayForLineCharts(dataAppliances)
         }
 
         var options = {
@@ -175,35 +128,18 @@
       function printOthersCanvas()
       {
         var ctx = document.getElementById('canvas_others');
-      
+
+        var labels = ['29/04/2020', '06/05/2020', '13/05/2020', '20/05/2020'];
+
+        // Label[0],            Fill[1],    Color/BorderColor[2],   BackgroundColor[3],   Data[4]
+        var dataAppliances = [
+          ['Others',            false,      blue,                   blue,                 [77, 64, 85, 86] ],
+          ['Objetive',          true,       red,                    lightRed,             [80, 80, 80, 80] ],
+        ];
+
         var data =  {
-          labels: ['29/04/2020', '06/05/2020', '13/05/2020', '20/05/2020'],
-          datasets: [
-            {
-              label: 'Others',
-              fill: false,
-              pointHoverRadius: 6,
-              borderWidth: 2,
-              lineTension: 0,
-              selected: false,
-              color: blue,
-              borderColor: blue.toString(),
-              backgroundColor: blue.toString(),
-              data: [77, 64, 85, 86]
-            },
-            {
-              label: 'Objetive',
-              borderWidth: 2,
-              lineTension: 0,
-              pointHoverRadius: 6,
-              selected: false,
-              color: red,
-              colorBackground: lightRed,
-              borderColor: red.toString(),
-              backgroundColor: lightRed.toString(),
-              data: [80, 80, 80, 80]
-            }
-          ]
+          labels: labels,
+          datasets: CreateDataSetArrayForLineCharts(dataAppliances)
         }
 
         var options = {
@@ -252,59 +188,20 @@
       function printDetectedCanvas()
       {
         var ctx = document.getElementById('canvas_detected');
-      
+
+        var labels = ['29/04/2020', '06/05/2020', '13/05/2020', '20/05/2020'];
+
+        // Label[0],            Fill[1],    Color/BorderColor[2],   BackgroundColor[3],   Data[4]
+        var dataAppliances = [
+          ['Dishwasher',        false,      blue,                   blue,                 [45, 64, 69, 60] ],
+          ['Tumble Dryer',      false,      yellow,                 yellow,               [49, 44, 45, 45] ],
+          ['Washing Machine',   false,      green,                  green,                [80, 78, 81, 82] ],
+          ['Objetive',          true,       red,                    lightRed,             [80, 80, 80, 80] ],
+        ];
+
         var data =  {
-          labels: ['29/04/2020', '06/05/2020', '13/05/2020', '20/05/2020'],
-          datasets: [
-            {
-              label: 'Dishwasher',
-              fill: false,
-              pointHoverRadius: 6,
-              borderWidth: 2,
-              lineTension: 0,
-              selected: false,
-              color: blue,
-              borderColor: blue.toString(),
-              backgroundColor: blue.toString(),
-              data: [45, 64, 69, 60]
-            },
-            {
-              label: 'Tumble Dryer',
-              fill: false,
-              pointHoverRadius: 6,
-              borderWidth: 2,
-              lineTension: 0,
-              selected: false,
-              color: yellow,
-              borderColor: yellow.toString(),
-              backgroundColor: yellow.toString(),
-              data: [49, 44, 45, 45]
-            },
-            {
-              label: 'Washing Machine',
-              fill: false,
-              pointHoverRadius: 6,
-              borderWidth: 2,
-              lineTension: 0,
-              selected: false,
-              color: green,
-              borderColor: green.toString(),
-              backgroundColor: green.toString(),
-              data: [80, 78, 81, 82]
-            },
-            {
-              label: 'Objetive',
-              borderWidth: 2,
-              lineTension: 0,
-              pointHoverRadius: 6,
-              selected: false,
-              color: red,
-              colorBackground: lightRed,
-              borderColor: red.toString(),
-              backgroundColor: lightRed.toString(),
-              data: [80, 80, 80, 80]
-            }
-          ]
+          labels: labels,
+          datasets: CreateDataSetArrayForLineCharts(dataAppliances)
         }
 
         var options = {
@@ -353,60 +250,20 @@
       function printFalsePositiveCanvas()
       {
         var ctx = document.getElementById('canvas_falsepositive');
-      
+
+        var labels = ['29/04/2020', '06/05/2020', '13/05/2020', '20/05/2020'];
+
+        // Label[0],            Fill[1],    Color/BorderColor[2],   BackgroundColor[3],   Data[4]
+        var dataAppliances = [
+          ['Dishwasher',        false,      blue,                   blue,                 [2, 21, 16, 7]    ],
+          ['Tumble Dryer',      false,      yellow,                 yellow,               [4, 4, 5, 6]      ],
+          ['Washing Machine',   false,      green,                  green,                [13, 12, 16, 17]  ],
+          ['Objetive',          'end',      red,                    lightRed,             [10, 10, 10, 10]  ],
+        ];
+
         var data =  {
-          labels: ['29/04/2020', '06/05/2020', '13/05/2020', '20/05/2020'],
-          datasets: [
-            {
-              label: 'Dishwasher',
-              fill: false,
-              pointHoverRadius: 6,
-              borderWidth: 2,
-              lineTension: 0,
-              selected: false,
-              color: blue,
-              borderColor: blue.toString(),
-              backgroundColor: blue.toString(),
-              data: [2, 21, 16, 7]
-            },
-            {
-              label: 'Tumble Dryer',
-              fill: false,
-              pointHoverRadius: 6,
-              borderWidth: 2,
-              lineTension: 0,
-              selected: false,
-              color: yellow,
-              borderColor: yellow.toString(),
-              backgroundColor: yellow.toString(),
-              data: [4, 4, 5, 6]
-            },
-            {
-              label: 'Washing Machine',
-              fill: false,
-              pointHoverRadius: 6,
-              borderWidth: 2,
-              lineTension: 0,
-              selected: false,
-              color: green,
-              borderColor: green.toString(),
-              backgroundColor: green.toString(),
-              data: [13, 12, 16, 17]
-            },
-            {
-              label: 'Objetive',
-              fill: 'end',
-              borderWidth: 2,
-              lineTension: 0,
-              pointHoverRadius: 6,
-              selected: false,
-              color: red,
-              colorBackground: lightRed,
-              borderColor: red.toString(),
-              backgroundColor: lightRed.toString(),
-              data: [10, 10, 10, 10]
-            }
-          ]
+          labels: labels,
+          datasets: CreateDataSetArrayForLineCharts(dataAppliances)
         }
 
         var options = {
@@ -617,54 +474,28 @@
       }
 
 
+
+
+
 /*---------------- Correctness By Meter Per Appliance ----------------*/
 
       /* Washing Machine */
       function printCorrectnessByMeterWashingMachine()
       {
         var ctx = document.getElementById('canvas_correctness_by_meter_washing_machine');
-      
+
+        var labels = ['fef3', '78f9', 'fda4', 'da77', 'c72f', '237e', '56d6', '4ec4', 'f4a6'];
+
+        // Label[0],                      Type[1],      yAxisID[2],                               Color/BorderColor[3],   BackgroundColor[4],   Data[5]
+        var data = [
+          ['Percentage Correct Days',     'bar',        'y-axis-prctg-correct-days-objective',    blue,                   blue,                 [58.82, 63.63, 66.66, 83.33, 85.71, 88.46, 91.30, 100, 100] ],
+          ['Number of Days',              'bar',        'y-axis-number-days',                     yellow,                 yellow,               [17, 11, 3, 18, 42, 26, 46, 1, 25] ],
+          ['Objetive',                    'line',       'y-axis-prctg-correct-days-objective',    red,                    lightRed,             [80, 80, 80, 80, 80, 80, 80, 80, 80] ],
+        ];
+
         var data =  {
-          //labels: ['fef3', '302d', '78f9', 'fda4', 'da77', 'c72f', '237e', '56d6', '8fe1', 'f4a6', '4ec4'],
-          labels: ['fef3', '78f9', 'fda4', 'da77', 'c72f', '237e', '56d6', '4ec4', 'f4a6'],
-          datasets: [
-            {
-              label: 'Percentage Correct Days',
-              selected: false,
-              barThickness: 'flex',
-              yAxisID: 'y-axis-prctg-correct-days-objective',
-              barPercentage: 0.8,
-              color: blue,
-              backgroundColor: blue.toString(),
-              //data: [58.82, 50, 63.63, 66.66, 83.33, 85.71, 88.46, 91.30, 92.30, 100, 100]
-              data: [58.82, 63.63, 66.66, 83.33, 85.71, 88.46, 91.30, 100, 100]
-            },
-            {
-              label: 'Number of Days',
-              selected: false,
-              yAxisID: 'y-axis-number-days',
-              barPercentage: 0.8,
-              color: yellow,
-              backgroundColor: yellow.toString(),
-              data: [17, 11, 3, 18, 42, 26, 46, 1, 25]
-              //data: [10, 8, 4, 3, 18, 38, 19, 39, 39, 18, 1]
-            },
-            {
-              label: 'Objetive',
-              yAxisID: 'y-axis-prctg-correct-days-objective',
-              type: 'line',
-              borderWidth: 2,
-              lineTension: 0,
-              pointHoverRadius: 6,
-              selected: false,
-              color: red,
-              colorBackground: lightRed,
-              borderColor: red.toString(),
-              backgroundColor: lightRed.toString(),
-              data: [80, 80, 80, 80, 80, 80, 80, 80, 80]
-              //data: [80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80]
-            }
-          ]
+          labels: labels,
+          datasets: CreateDataSetArrayForBarCharts(data)
         }
 
         var options = {
@@ -728,49 +559,23 @@
         });
       }
 
-
       /* Dishwasher */
       function printCorrectnessByMeterDishwasher()
       {
         var ctx = document.getElementById('canvas_correctness_by_meter_dishwasher');
-      
+
+        var labels = ['ac33', 'bffa', '237e', 'fef3', 'f4a6'];
+
+        // Label[0],                      Type[1],      yAxisID[2],                               Color/BorderColor[3],   BackgroundColor[4],   Data[5]
+        var data = [
+          ['Percentage Correct Days',     'bar',        'y-axis-prctg-correct-days-objective',    blue,                   blue,                 [25, 34.78, 57.89, 84.61, 87.5] ],
+          ['Number of Days',              'bar',        'y-axis-number-days',                     yellow,                 yellow,               [4, 46, 19, 26, 24] ],
+          ['Objetive',                    'line',       'y-axis-prctg-correct-days-objective',    red,                    lightRed,             [80, 80, 80, 80, 80] ],
+        ];
+
         var data =  {
-          labels: ['ac33', 'bffa', '237e', 'fef3', 'f4a6'],
-          datasets: [
-            {
-              label: 'Percentage Correct Days',
-              selected: false,
-              barThickness: 'flex',
-              yAxisID: 'y-axis-prctg-correct-days-objective',
-              barPercentage: 0.8,
-              color: blue,
-              backgroundColor: blue.toString(),
-              data: [25, 34.78, 57.89, 84.61, 87.5]
-            },
-            {
-              label: 'Number of Days',
-              selected: false,
-              yAxisID: 'y-axis-number-days',
-              barPercentage: 0.8,
-              color: yellow,
-              backgroundColor: yellow.toString(),
-              data: [4, 46, 19, 26, 24]
-            },
-            {
-              label: 'Objetive',
-              yAxisID: 'y-axis-prctg-correct-days-objective',
-              type: 'line',
-              borderWidth: 2,
-              lineTension: 0,
-              pointHoverRadius: 6,
-              selected: false,
-              color: red,
-              colorBackground: lightRed,
-              borderColor: red.toString(),
-              backgroundColor: lightRed.toString(),
-              data: [80, 80, 80, 80, 80]
-            }
-          ]
+          labels: labels,
+          datasets: CreateDataSetArrayForBarCharts(data)
         }
 
         var options = {
@@ -838,47 +643,19 @@
       function printCorrectnessByMeterFridge()
       {
         var ctx = document.getElementById('canvas_correctness_by_meter_fridge');
-      
+
+        var labels = ['56d6', '78f9', 'b3e9', '4473', 'f4a6', '4ec4'];
+
+        // Label[0],                      Type[1],      yAxisID[2],                               Color/BorderColor[3],   BackgroundColor[4],   Data[5]
+        var data = [
+          ['Percentage Correct Days',     'bar',        'y-axis-prctg-correct-days-objective',    blue,                   blue,                 [43.75, 76.66, 88.63, 90, 100, 100] ],
+          ['Number of Days',              'bar',        'y-axis-number-days',                     yellow,                 yellow,               [32, 30, 44, 30, 25, 1] ],
+          ['Objetive',                    'line',       'y-axis-prctg-correct-days-objective',    red,                    lightRed,             [80, 80, 80, 80, 80, 80] ],
+        ];
+
         var data =  {
-          //labels: ['fef3', '8fe1', '56d6', '78f9', 'b3e9', '4473', '4ec4', 'f4a6'],
-          labels: ['56d6', '78f9', 'b3e9', '4473', 'f4a6', '4ec4'],
-          datasets: [
-            {
-              label: 'Percentage Correct Days',
-              selected: false,
-              barThickness: 'flex',
-              yAxisID: 'y-axis-prctg-correct-days-objective',
-              barPercentage: 0.8,
-              color: blue,
-              backgroundColor: blue.toString(),
-              //data: [2.56, 47.36, 68, 78.26, 89.18, 91.30, 100, 100]
-              data: [43.75, 76.66, 88.63, 90, 100, 100]
-            },
-            {
-              label: 'Number of Days',
-              selected: false,
-              yAxisID: 'y-axis-number-days',
-              barPercentage: 0.8,
-              color: yellow,
-              backgroundColor: yellow.toString(),
-              //data: [39, 38, 25, 23, 37, 23, 1, 18]
-              data: [32, 30, 44, 30, 25, 1]
-            },
-            {
-              label: 'Objetive',
-              yAxisID: 'y-axis-prctg-correct-days-objective',
-              type: 'line',
-              borderWidth: 2,
-              lineTension: 0,
-              pointHoverRadius: 6,
-              selected: false,
-              color: red,
-              colorBackground: lightRed,
-              borderColor: red.toString(),
-              backgroundColor: lightRed.toString(),
-              data: [80, 80, 80, 80, 80, 80]
-            }
-          ]
+          labels: labels,
+          datasets: CreateDataSetArrayForBarCharts(data)
         }
 
         var options = {
@@ -942,49 +719,23 @@
         });
       }
 
-
       /* Tumble Dryer */
       function printCorrectnessByMeterTumbleDryer()
       {
         var ctx = document.getElementById('canvas_correctness_by_meter_tumble_dryer');
-      
+
+        var labels = ['b3e9', '237e', 'fef3', '8575'];
+
+        // Label[0],                      Type[1],      yAxisID[2],                               Color/BorderColor[3],   BackgroundColor[4],   Data[5]
+        var data = [
+          ['Percentage Correct Days',     'bar',        'y-axis-prctg-correct-days-objective',    blue,                   blue,                 [18.18, 47.72, 80.43, 97.87] ],
+          ['Number of Days',              'bar',        'y-axis-number-days',                     yellow,                 yellow,               [44, 44, 46, 47] ],
+          ['Objetive',                    'line',       'y-axis-prctg-correct-days-objective',    red,                    lightRed,             [80, 80, 80, 80] ],
+        ];
+
         var data =  {
-          labels: ['b3e9', '237e', 'fef3', '8575'],
-          datasets: [
-            {
-              label: 'Percentage Correct Days',
-              selected: false,
-              barThickness: 'flex',
-              yAxisID: 'y-axis-prctg-correct-days-objective',
-              barPercentage: 0.8,
-              color: blue,
-              backgroundColor: blue.toString(),
-              data: [18.18, 47.72, 80.43, 97.87]
-            },
-            {
-              label: 'Number of Days',
-              selected: false,
-              yAxisID: 'y-axis-number-days',
-              barPercentage: 0.8,
-              color: yellow,
-              backgroundColor: yellow.toString(),
-              data: [44, 44, 46, 47]
-            },
-            {
-              label: 'Objetive',
-              yAxisID: 'y-axis-prctg-correct-days-objective',
-              type: 'line',
-              borderWidth: 2,
-              lineTension: 0,
-              pointHoverRadius: 6,
-              selected: false,
-              color: red,
-              colorBackground: lightRed,
-              borderColor: red.toString(),
-              backgroundColor: lightRed.toString(),
-              data: [80, 80, 80, 80]
-            }
-          ]
+          labels: labels,
+          datasets: CreateDataSetArrayForBarCharts(data)
         }
 
         var options = {
@@ -1049,6 +800,65 @@
       }
 
 
+
+
+
+/*---------------- Create DataSet Array ----------------*/
+
+      function CreateDataSetArrayForLineCharts(options)
+      {
+        var dataSets = [];
+
+        for (let i = 0; i < options.length; i++) {
+
+          var dataSet = {
+            pointHoverRadius: 6,
+            borderWidth: 2,
+            lineTension: 0,
+            selected: false,
+            label: options[i][0],
+            fill: options[i][1],
+            color: options[i][2],
+            borderColor: options[i][2].toString(),
+            backgroundColor: options[i][3].toString(),
+            data: options[i][4]
+          };
+
+          dataSets.push(dataSet);
+        }
+
+        return dataSets;
+      }
+
+      function CreateDataSetArrayForBarCharts(options)
+      {
+        var dataSets = [];
+
+        for (let i = 0; i < options.length; i++) {
+
+          var dataSet = {
+            borderWidth: 2,
+            lineTension: 0,
+            pointHoverRadius: 6,
+            selected: false,
+            label: options[i][0],
+            type: options[i][1],
+            yAxisID: options[i][2],
+            color: options[i][3],
+            borderColor: options[i][3].toString(),
+            colorBackground: options[i][4],
+            backgroundColor: options[i][4].toString(),
+            data: options[i][5]
+          };
+
+          dataSets.push(dataSet);
+        }
+
+        return dataSets;
+      }
+
+
+
 /*---------------- Update iframe height ----------------*/
 
       function updateIframeHeight() {
@@ -1056,7 +866,7 @@
         var plots = document.getElementById('plots');
         var plotsStyle = getComputedStyle(plots);
 
-        console.log('Plot Height 3: ' + plotsStyle.height);
+        console.log('Plot Height: ' + plotsStyle.height);
 
         /*
         var iFrameID = window.parent.document.getElementById('iframe_plots');
@@ -1071,6 +881,9 @@
           iFrameID.height = plotsStyle.height;
         }*/
       }
+
+
+
 
 
 /*---------------- Improvements on Charts behaviours ----------------*/
