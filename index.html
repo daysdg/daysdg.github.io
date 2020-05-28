@@ -21,118 +21,47 @@
 
     <script type="text/javascript">
 
-      function Color(red, green, blue, alpha) {
-        this.red = red;
-        this.green = green;
-        this.blue = blue; 
-        this.alpha = alpha;
-        this.toString = () => `rgb(${this.red}, ${this.green}, ${this.blue}, ${this.alpha})`;
-      }
+      const colors = createColors();
 
-      const blue = new Color(66, 133, 244, 1);
-      const yellow = new Color(244, 180, 0, 1);
-      const green = new Color(15, 157, 88, 1);
-      const purple = new Color(171, 71, 188, 1);
-      const red = new Color(219, 68, 55, 1);
-      const lightRed = new Color(219, 68, 55, 0.12);
+      var kpiCsv = ',2020-04-29,2020-05-06,2020-05-13,2020-05-20,2020-05-27\nperct_days_with_others_less_20,77,64,85,86,85\nDishwasher_prct_detected,45,64,69,60,74\nDishwasher_prct_false_positive,2,21,16,7,4\nDishwasher_prct_correct,30,44,56,61,77\nTumbleDryer_prct_detected,49,44,45,45,44\nTumbleDryer_false_positive,4,4,5,6,7\nTumbleDryer_prct_correct,45,41,60,62,65\nWashingMachine_prct_detected,80,78,81,82,78\nWashingMachine_false_positive,13,12,16,17,18\nWashingMachine_prct_correct,86,80,84,85,88\nSingleFridge_prct_correct,45,60,62,80,83';
+      var kpiData = readCVS(kpiCsv);
+      createKPIsCanvas(kpiData);
 
-      printCorrectCanvas();
-      printOthersCanvas();
-      printDetectedCanvas();
-      printFalsePositiveCanvas();
-
-      //printSmartCablesConnection();
-      //printSmartCablesPerApplianceConnection();
-
-      printCorrectnessByMeterWashingMachine();
-      printCorrectnessByMeterDishwasher();
-      printCorrectnessByMeterFridge();
-      printCorrectnessByMeterTumbleDryer();
+      var correctnessCsv = 'appliance,meter_id,num_days,num_correct_days,prct_correct_days\nDishwasher,237e2cd9-f7c3-4e1e-9607-8545d755ada7,32,24,75\nDishwasher,bffa1b89-7328-413a-886f-4712ec8f3c12,48,28,58.3333333333333\nDishwasher,f4a64c6a-33c9-4ca5-9579-a36add57a9e7,59,51,86.4406779661017\nDishwasher,fef3cbef-13ec-4b06-b2cd-f9c2cf0c09bb,61,51,83.6065573770492\nSingleFridge,44739798-89d0-45b8-8ba7-7946facfa9c9,72,68,94.4444444444444\nSingleFridge,4ec49423-22df-4fe2-bd80-07af918c1bac,2,2,100\nSingleFridge,56d6412c-b5c7-41fa-8e21-9adc83e93f7e,76,46,60.5263157894737\nSingleFridge,78f9e22e-bd12-4c0d-b724-045d6ed5e4c5,70,52,74.2857142857143\nSingleFridge,b3e92fd2-a486-43ac-8ab5-f99fa808fe86,88,76,86.3636363636364\nSingleFridge,f4a64c6a-33c9-4ca5-9579-a36add57a9e7,60,60,100\nTumbleDryer,237e2cd9-f7c3-4e1e-9607-8545d755ada7,55,26,47.2727272727273\nTumbleDryer,85757c17-f87f-4308-a899-1a3777819af4,47,46,97.8723404255319\nTumbleDryer,b3e92fd2-a486-43ac-8ab5-f99fa808fe86,44,8,18.1818181818182\nTumbleDryer,fef3cbef-13ec-4b06-b2cd-f9c2cf0c09bb,98,79,80.6122448979592\nWashingMachine,237e2cd9-f7c3-4e1e-9607-8545d755ada7,40,36,90\nWashingMachine,4ec49423-22df-4fe2-bd80-07af918c1bac,1,1,100\nWashingMachine,56d6412c-b5c7-41fa-8e21-9adc83e93f7e,52,48,92.3076923076923\nWashingMachine,78f9e22e-bd12-4c0d-b724-045d6ed5e4c5,16,11,68.75\nWashingMachine,c72f03e4-25aa-4044-b7b2-c58b090ba182,84,72,85.7142857142857\nWashingMachine,da77074f-43ff-44b7-8efa-180bcf5d6a53,23,19,82.6086956521739\nWashingMachine,f4a64c6a-33c9-4ca5-9579-a36add57a9e7,59,57,96.6101694915254\nWashingMachine,fda4646b-4f9c-4e51-b779-ac916c0b687d,3,2,66.6666666666667';
+      var correctnessData = readCVS(correctnessCsv);
+      createCorrectnessCanvas(correctnessData);
 
       updateIframeHeight();
 
 
 
 
-
 /*---------------- KIPs overviews ----------------*/
 
-      function printCorrectCanvas()
+      function printCorrectCanvas(labels, dataArray, object)
       {
-        var labels = ['29/04/2020', '06/05/2020', '13/05/2020', '20/05/2020', '27/05/2020'];
-
-        // Label[0],            Fill[1],    Color/BorderColor[2],   BackgroundColor[3],   Data[4]
-        var dataAppliances = [
-          ['Dishwasher',        false,      blue,                   null,                 [30, 44, 56, 61, 77] ],
-          ['Tumble Dryer',      false,      yellow,                 null,                 [45, 41, 60, 62, 55] ],
-          ['Washing Machine',   false,      green,                  null,                 [86, 80, 84, 85, 88] ],
-          ['Fridge',            false,      purple,                 null,                 [45, 60, 62, 80, 83] ],
-          ['Objetive',          true,       red,                    lightRed,             [80, 80, 80, 80, 80] ],
-        ];
-
-        var data =  {
-          labels: labels,
-          datasets: CreateDataSetArrayForLineCharts(dataAppliances)
-        }
+        var data =  createDataApplianceKPI(labels, dataArray, object);
 
         CreateLineChart('canvas_correct', 'Correct Energy', data);
-
       }
 
-      function printOthersCanvas()
+      function printOthersCanvas(labels, dataArray, object)
       {
-        var labels = ['29/04/2020', '06/05/2020', '13/05/2020', '20/05/2020', '27/05/2020'];
-
-        // Label[0],            Fill[1],    Color/BorderColor[2],   BackgroundColor[3],   Data[4]
-        var dataAppliances = [
-          ['Others',            false,      blue,                   blue,                 [77, 64, 85, 86, 85] ],
-          ['Objetive',          true,       red,                    lightRed,             [80, 80, 80, 80, 80] ],
-        ];
-
-        var data =  {
-          labels: labels,
-          datasets: CreateDataSetArrayForLineCharts(dataAppliances)
-        }
+        var data =  createDataApplianceKPI(labels, dataArray, object);
 
         CreateLineChart('canvas_others', 'Percentage of days with Others <20%', data);
       }
 
-      function printDetectedCanvas()
+      function printDetectedCanvas(labels, dataArray, object)
       {
-        var labels = ['29/04/2020', '06/05/2020', '13/05/2020', '20/05/2020', '27/05/2020'];
-
-        // Label[0],            Fill[1],    Color/BorderColor[2],   BackgroundColor[3],   Data[4]
-        var dataAppliances = [
-          ['Dishwasher',        false,      blue,                   blue,                 [45, 64, 69, 60, 74] ],
-          ['Tumble Dryer',      false,      yellow,                 yellow,               [49, 44, 45, 45, 44] ],
-          ['Washing Machine',   false,      green,                  green,                [80, 78, 81, 82, 78] ],
-          ['Objetive',          true,       red,                    lightRed,             [80, 80, 80, 80, 80] ],
-        ];
-
-        var data =  {
-          labels: labels,
-          datasets: CreateDataSetArrayForLineCharts(dataAppliances)
-        }
+        var data =  createDataApplianceKPI(labels, dataArray, object);
 
         CreateLineChart('canvas_detected', 'Detected Cycles', data);
       }
 
-      function printFalsePositiveCanvas()
+      function printFalsePositiveCanvas(labels, dataArray, object)
       {
-        var labels = ['29/04/2020', '06/05/2020', '13/05/2020', '20/05/2020', '27/05/2020'];
-
-        // Label[0],            Fill[1],    Color/BorderColor[2],   BackgroundColor[3],   Data[4]
-        var dataAppliances = [
-          ['Dishwasher',        false,      blue,                   blue,                 [2,  21, 16, 7,  4]  ],
-          ['Tumble Dryer',      false,      yellow,                 yellow,               [4,  4,  5,  6,  7]  ],
-          ['Washing Machine',   false,      green,                  green,                [13, 12, 16, 17, 18] ],
-          ['Objetive',          'end',      red,                    lightRed,             [10, 10, 10, 10, 10] ],
-        ];
-
-        var data =  {
-          labels: labels,
-          datasets: CreateDataSetArrayForLineCharts(dataAppliances)
-        }
+        var data =  createDataApplianceKPI(labels, dataArray, object);
 
         CreateLineChart('canvas_falsepositive', 'False Positive Cycles', data);
       }
@@ -307,82 +236,50 @@
 
 /*---------------- Correctness By Meter Per Appliance ----------------*/
 
-      /* Washing Machine */
-      function printCorrectnessByMeterWashingMachine()
+      function printCorrectnessByMeterWashingMachine(arrayData)
       {
-        var labels = ['fda4', '78f9', 'da77', 'c72f', '237e', '56d6', 'f4a6', '4ec4'];
-
-        // Label[0],                      Type[1],      yAxisID[2],                               BorderColor[3],   BackgroundColor[4],   Data[5]
-        var data = [
-          ['Percentage Correct Days',     'bar',        'y-axis-prctg-correct-days-objective',    blue,             blue,                 [66.66, 68.75, 82.60, 85.71, 90, 92.30, 96.61, 100] ],
-          ['Number of Days',              'bar',        'y-axis-number-days',                     yellow,           yellow,               [3, 16, 23, 84, 40, 52, 59, 1] ],
-          ['Objetive',                    'line',       'y-axis-prctg-correct-days-objective',    red,              lightRed,             [80, 80, 80, 80, 80, 80, 80, 80] ],
-        ];
-
-        var data =  {
-          labels: labels,
-          datasets: CreateDataSetArrayForBarCharts(data)
+        if(arrayData == null)
+        {
+          return;
         }
+
+        var data = createDataApplianceCorrectness(arrayData);
 
         CreateBarChart('canvas_correctness_by_meter_washing_machine', 'Washing Machine', data );
       }
 
-      /* Dishwasher */
-      function printCorrectnessByMeterDishwasher()
+      function printCorrectnessByMeterDishwasher(arrayData)
       {
-        var labels = ['bffa', '237e', 'fef3', 'f4a6'];
-
-        // Label[0],                      Type[1],      yAxisID[2],                               Color/BorderColor[3],   BackgroundColor[4],   Data[5]
-        var data = [
-          ['Percentage Correct Days',     'bar',        'y-axis-prctg-correct-days-objective',    blue,                   blue,                 [58.33, 75, 83.60, 86.44] ],
-          ['Number of Days',              'bar',        'y-axis-number-days',                     yellow,                 yellow,               [48, 32, 61, 59] ],
-          ['Objetive',                    'line',       'y-axis-prctg-correct-days-objective',    red,                    lightRed,             [80, 80, 80, 80] ],
-        ];
-
-        var data =  {
-          labels: labels,
-          datasets: CreateDataSetArrayForBarCharts(data)
+        if(arrayData == null)
+        {
+          return;
         }
+
+        var data = createDataApplianceCorrectness(arrayData);
 
         CreateBarChart('canvas_correctness_by_meter_dishwasher', 'Dishwasher', data );
       }
 
-      /* Meter Fridge */
-      function printCorrectnessByMeterFridge()
+      function printCorrectnessByMeterFridge(arrayData)
       {
-        var labels = ['fef3', '56d6', '78f9', 'b3e9', '4473', 'f4a6', '4ec4'];
-
-        // Label[0],                      Type[1],      yAxisID[2],                               Color/BorderColor[3],   BackgroundColor[4],   Data[5]
-        var data = [
-          ['Percentage Correct Days',     'bar',        'y-axis-prctg-correct-days-objective',    blue,                   blue,                 [16.34, 50.52, 74.28, 86.36, 94.44, 100, 100] ],
-          ['Number of Days',              'bar',        'y-axis-number-days',                     yellow,                 yellow,               [104, 76, 70, 88, 72, 60, 2] ],
-          ['Objetive',                    'line',       'y-axis-prctg-correct-days-objective',    red,                    lightRed,             [80, 80, 80, 80, 80, 80, 80] ],
-        ];
-
-        var data =  {
-          labels: labels,
-          datasets: CreateDataSetArrayForBarCharts(data)
+        if(arrayData == null)
+        {
+          return;
         }
+
+        var data = createDataApplianceCorrectness(arrayData);
 
         CreateBarChart('canvas_correctness_by_meter_fridge', 'Fridge', data);
       }
 
-      /* Tumble Dryer */
-      function printCorrectnessByMeterTumbleDryer()
+      function printCorrectnessByMeterTumbleDryer(arrayData)
       {
-        var labels = ['b3e9', '237e', 'fef3', '8575'];
-
-        // Label[0],                      Type[1],      yAxisID[2],                               Color/BorderColor[3],   BackgroundColor[4],   Data[5]
-        var data = [
-          ['Percentage Correct Days',     'bar',        'y-axis-prctg-correct-days-objective',    blue,                   blue,                 [18.18, 47.27, 80.61, 97.87] ],
-          ['Number of Days',              'bar',        'y-axis-number-days',                     yellow,                 yellow,               [44, 55, 98, 47] ],
-          ['Objetive',                    'line',       'y-axis-prctg-correct-days-objective',    red,                    lightRed,             [80, 80, 80, 80] ],
-        ];
-
-        var data =  {
-          labels: labels,
-          datasets: CreateDataSetArrayForBarCharts(data)
+        if(arrayData == null)
+        {
+          return;
         }
+
+        var data = createDataApplianceCorrectness(arrayData);
 
         CreateBarChart('canvas_correctness_by_meter_tumble_dryer', 'Tumble Dryer', data);
       }
@@ -744,6 +641,283 @@
         chart.tooltip.update(true);
         chart.draw();
       }
+
+
+
+
+
+/*---------------- Colors ----------------*/
+      function Color(red, green, blue, alpha) {
+        this.red = red;
+        this.green = green;
+        this.blue = blue; 
+        this.alpha = alpha;
+        this.toString = () => `rgb(${this.red}, ${this.green}, ${this.blue}, ${this.alpha})`;
+      }
+
+      function createColors()
+      {
+        var blue = new Color(66, 133, 244, 1);
+        var yellow = new Color(244, 180, 0, 1);
+        var green = new Color(15, 157, 88, 1);
+        var purple = new Color(171, 71, 188, 1);
+        var red = new Color(219, 68, 55, 1);
+        var lightRed = new Color(219, 68, 55, 0.12);
+
+
+        return [blue, yellow, green, purple, red, lightRed];
+      }
+
+      function createObjective(objectiveValue, labels)
+      {
+        // Label[0],            Fill[1],    Color/BorderColor[2],   BackgroundColor[3],   Data[4]
+        //['Objetive',          true,       red,                    lightRed,             [80, 80, 80, 80, 80] ]
+
+        var fill = true;
+        if(objectiveValue <= 10)
+        {
+          fill = 'end';
+        }
+
+        var data = [];
+
+        for (let i = 0; i < labels.length; i++)
+        {
+          data.push(objectiveValue);
+        }
+
+        return ['Objective', fill, colors[4], colors[5], data ];
+      }
+
+
+
+
+
+/*---------------- CVS ----------------*/
+      function readCVS(allText) {
+        var allTextLines = allText.split(/\r\n|\n/);
+
+        var lines = [];
+
+        for (var i=0; i<allTextLines.length; i++) {
+            var data = allTextLines[i].split(',');
+
+            lines.push(data);
+        }
+
+        return lines;
+    }
+
+      function createKPIsCanvas(kpiData)
+      {
+        var prctCorrectString = "_prct_correct";
+        var prctDetected = "_prct_detected";
+        var prctFalsePositive = "_false_positive";
+        var prctOther = "perct_days_with_others_less_20";
+
+        if(kpiData == null)
+        {
+          return;
+        }
+
+        var labels = [];
+
+        for (let i = 0; i < kpiData[0].length; i++)
+        {
+          if(kpiData[0][i] != null && kpiData[0][i] != "")
+          {
+            labels.push(kpiData[0][i]);
+          }
+        }
+
+        if(labels == null)
+        {
+          return;
+        }
+
+        var correctData = [];
+        var detectedData = [];
+        var falsePositiveData = [];
+        var othersData = [];
+
+        for (let i = 1; i < kpiData.length; i++) 
+        {
+          if(kpiData[i][0].includes(prctCorrectString))
+          {
+            var correctValues = [];
+
+            var label = kpiData[i][0].replace(prctCorrectString, "");
+
+            for (let j = 1; j < kpiData[i].length; j++)
+            {
+              correctValues.push(kpiData[i][j]);
+            }
+
+            correctData.push([label, correctValues]);
+          }
+          else if(kpiData[i][0].includes(prctDetected))
+          {
+            var label = kpiData[i][0].replace(prctDetected, "");
+
+            var detectedValues = [];
+            for (let j = 1; j < kpiData[i].length; j++)
+            {
+              detectedValues.push(kpiData[i][j]);
+            }
+
+            var detected = [label, detectedValues];
+
+            detectedData.push(detected);
+          }
+          else if(kpiData[i][0].includes(prctFalsePositive))
+          {
+            var label = kpiData[i][0].replace(prctFalsePositive, "");
+
+            var falsePositiveValues = [];
+
+            for (let j = 1; j < kpiData[i].length; j++)
+            {
+              falsePositiveValues.push(kpiData[i][j]);
+            }
+
+            falsePositiveData.push([label, falsePositiveValues]);
+          }
+          else if(kpiData[i][0].includes(prctOther))
+          {
+            var others = [];
+            var othersValues = [];
+
+            for (let j = 1; j < kpiData[i].length; j++)
+            {
+              othersValues.push(kpiData[i][j]);
+            }
+
+            other = ["Others", othersValues];
+
+            othersData.push(other);
+          }
+        }
+
+        var objective80 = createObjective(80, labels);
+        var objective10 = createObjective(10, labels);
+
+        printCorrectCanvas(labels, correctData, objective80);
+        printOthersCanvas(labels, othersData, objective80);
+        printDetectedCanvas(labels, detectedData, objective80);
+        printFalsePositiveCanvas(labels, falsePositiveData, objective10);
+
+        //printSmartCablesConnection();
+        //printSmartCablesPerApplianceConnection();
+      }
+
+      function createCorrectnessCanvas(correctnessData)
+      {
+        if(kpiData == null)
+        {
+          return;
+        }
+
+        console.log(correctnessData);
+
+        var data = {}; 
+
+        for (let i = 1; i < correctnessData.length; i++)
+        {
+
+          if(data[correctnessData[i][0]] == null)
+          {
+            data[correctnessData[i][0]] = [];
+          }
+
+          data[correctnessData[i][0]].push([
+              getSensorId4Chars(correctnessData[i][1]),
+              Number(correctnessData[i][2]), 
+              Number(correctnessData[i][4])
+            ]
+          );
+         
+        }
+
+        printCorrectnessByMeterWashingMachine(data["WashingMachine"]);
+        printCorrectnessByMeterDishwasher(data["Dishwasher"]);
+        printCorrectnessByMeterFridge(data["SingleFridge"]);
+        printCorrectnessByMeterTumbleDryer(data["TumbleDryer"]);
+
+      }
+
+
+
+
+/*---------------- AssistFunctions ----------------*/
+      function createDataApplianceKPI(labels, dataArray, object)
+      {
+        // Label[0],            Fill[1],    Color/BorderColor[2],   BackgroundColor[3],   Data[4]
+        var dataAppliances = [];
+
+        for (let i = 0; i < dataArray.length; i++) {
+          var appliance = [dataArray[i][0], false, colors[i], null, dataArray[i][1]];
+
+          dataAppliances.push(appliance);
+        }
+
+        dataAppliances.push(object);
+
+        var data =  {
+          labels: labels,
+          datasets: CreateDataSetArrayForLineCharts(dataAppliances)
+        }
+
+        return data;
+      }
+
+      function createDataApplianceCorrectness(dataArray)
+      {
+        dataArray = shortCorrectessByPrctCorrectDays(dataArray);
+
+        var labels = [];
+        var numberOfDays = [];
+        var perctCorrectDays = [];
+        var objective = [];
+
+        for (let i = 0; i < dataArray.length; i++)
+        {
+          labels.push(dataArray[i][0]);
+          numberOfDays.push(dataArray[i][1]);
+          perctCorrectDays.push(dataArray[i][2]);
+
+          objective.push(80);
+        }
+
+        // Label[0],                      Type[1],      yAxisID[2],                               BorderColor[3],   BackgroundColor[4],   Data[5]
+        var data = [
+          ['Percentage Correct Days',     'bar',        'y-axis-prctg-correct-days-objective',    colors[0],        colors[0],            perctCorrectDays ],
+          ['Number of Days',              'bar',        'y-axis-number-days',                     colors[1],        colors[1],            numberOfDays     ],
+          ['Objetive',                    'line',       'y-axis-prctg-correct-days-objective',    colors[4],        colors[5],            objective        ],
+        ];
+
+        var data =  {
+          labels: labels,
+          datasets: CreateDataSetArrayForBarCharts(data)
+        }
+
+        return data;
+      }
+
+      function getSensorId4Chars(sensorId)
+      {
+        var fourCharSensorId = sensorId.slice(0, 4);
+
+
+        return fourCharSensorId;
+      }
+
+      function shortCorrectessByPrctCorrectDays(dataArray)
+      {
+        var shortedArray = dataArray.sort(function(a, b) { return a[2] - b[2]; });
+
+        return shortedArray;
+      }
+
 
     </script>
 
